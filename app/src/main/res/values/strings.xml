@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Color Clicker</string>
+    <string name="left_color">Click me!</string>
+    <string name="right_color">No, click me!</string>
+    <string name="default_timer">Timer&#8230;</string>
+    <string name="timer_timesup">Times up!</string>
+    <string name="welcome_text">Welcome to Color Clicker!</string>
+    <string name="left_pregame">Click me!</string>
+    <string name="right_pregame">No, click me!</string>
+    <string name="press_to_start">Press to start!</string>
+    <string name="game_lost_generic">You lose!</string>
+    <string name="game_lost_because_wrong">Wrong!</string>
+    <string name="game_lost_because_time">Times up!</string>
+    <string name="play_button">Play Game</string>
+    <string name="settings_button">Settings</string>
+    <string name="high_scores_button">High Scores</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="nickname_edittext_hint">Enter your nickname</string>
+    <string name="toggle_local">Local scores</string>
+    <string name="toggle_global">Global scores</string>
+    <string name="toggle_soundOn">Sound on</string>
+    <string name="toggle_soundOff">Sound off</string>
+    <string name="dangerzone">Warning - Danger Zone</string>
+    <string name="are_you_sure">Are you sure? (Press to delete)</string>
+    <string name="button_deleteContent">Erase High Scores</string>
+    <string name="listview_label_user">Username</string>
+    <string name="listview_label_score">Score</string>
+    <string name="delete_content_warning">Warning: deleting your high scores is permanent and
+        cannot be reversed. Make sure that you actually want to delete them before pressing
+        that button right there. There is nothing the developer or anybody else in the entire
+        world can do to get your precious, hard-earned high scores back after you delete them.</string>
+
+    <string name="sharedPreferences_nickname">nickname</string>
+    <string name="sharedPreferences_firstTime">firstTime</string>
+    <string name="sharedPreferences_uniqueId">uniqueId</string>
+    <string name="sharedPreferences_initialLaunch">initialLaunch</string>
+    <string name="sharedPreferences_highscoreOne">highScore1</string>
+    <string name="sharedPreferences_highscoreTwo">highScore2</string>
+    <string name="sharedPreferences_highscoreThree">highScore3</string>
+    <string name="sharedPreferences_highscoreFour">highScore4</string>
+    <string name="sharedPreferences_highscoreFive">highScore5</string>
+</resources>

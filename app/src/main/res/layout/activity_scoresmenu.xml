@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout_rootLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88ffa6">
+
+    <TextView
+        android:id="@+id/textview_titleTextMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/high_scores_button"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <ToggleButton
+        android:id="@+id/togglebutton_listViews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/toggle_local"
+        android:textOn="@string/toggle_global"
+        android:layout_gravity="center_horizontal"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/listview_label_user"
+            android:textSize="18sp"
+            android:layout_marginRight="70dp"
+            android:layout_marginEnd="70dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/listview_label_score"
+            android:textSize="18sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewLocal"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewGlobal"
+        android:visibility="gone"/>
+
+</LinearLayout>
