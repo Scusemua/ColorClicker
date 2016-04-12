@@ -23,8 +23,10 @@
     <string name="dangerzone">Warning - Danger Zone</string>
     <string name="are_you_sure">Are you sure? (Press to delete)</string>
     <string name="button_deleteContent">Erase High Scores</string>
-    <string name="listview_label_user">Username</string>
+    <string name="listview_label_user">Nickname</string>
     <string name="listview_label_score">Score</string>
+    <string name="button_colorChooser">Pick Colors</string>
+    <string name="textview_colorChooserTitle">Color Chooser</string>
     <string name="delete_content_warning">Warning: deleting your high scores is permanent and
         cannot be reversed. Make sure that you actually want to delete them before pressing
         that button right there. There is nothing the developer or anybody else in the entire
@@ -34,9 +36,4 @@
     <string name="sharedPreferences_firstTime">firstTime</string>
     <string name="sharedPreferences_uniqueId">uniqueId</string>
     <string name="sharedPreferences_initialLaunch">initialLaunch</string>
-    <string name="sharedPreferences_highscoreOne">highScore1</string>
-    <string name="sharedPreferences_highscoreTwo">highScore2</string>
-    <string name="sharedPreferences_highscoreThree">highScore3</string>
-    <string name="sharedPreferences_highscoreFour">highScore4</string>
-    <string name="sharedPreferences_highscoreFive">highScore5</string>
 </resources>

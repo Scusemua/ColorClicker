@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,17 +27,17 @@ public class MainMenu extends AppCompatActivity {
     private Button mSettingsButton;      // Reference to the settings button
     private Button mScoresButton;        // Reference to the high scores button
     private String mUniqueUserId;        // Unique user ID for submitting high scores
-    private boolean forceFirstTimeSetup = false;          // Forces the first time setup method to run
-    private boolean forceInitialLaunchSetup = false;     // Forces the initial launch setup method to run
+    private String mUserNickname;        // Nickname for the user
+    private boolean mForceFirstTimeSetup = true;          // Forces the first time setup method to run
+    private boolean mForceInitialLaunchSetup = false;     // Forces the initial launch setup method to run
 
-    public static SharedPreferences sSharedPref;        // SharedPreferences object for the app
-    public static String sUserNickname;                 // Nickname for the user
-    public static String[] sLocalHighScores;            // Array of the local high scores
-    public static String[] sGlobalHighScores;           // Array of the global high scores
-    // Array of the local high scores with ONLY numbers, no usernames
-    public static Integer[] sLocalHighScoresNums;
-    // Array of the global high scores with ONLY numbers, no usernames
-    public static Integer[] sGlobalHighScoresNums;
+    // SharedPreferences object for the app
+    public static SharedPreferences sSharedPref;
+
+    // Array of the local high scores
+    public static ArrayList<Highscore> sLocalHighScores = new ArrayList<>();
+    // Array of the global high scores
+    public static ArrayList<Highscore> sGlobalHighScores = new ArrayList<>();
 
     private final String TAG = "ColorClickerMainMenu";  // TAG String
 
@@ -57,16 +59,16 @@ public class MainMenu extends AppCompatActivity {
         boolean isInitialLaunch = sSharedPref.getBoolean(getString(R.string.sharedPreferences_initialLaunch), true);
 
         // Load in the user's saved nickname
-        sUserNickname = sSharedPref.getString(getString(R.string.sharedPreferences_nickname), "I NEED TO SET A NICKNAME");
+        mUserNickname = sSharedPref.getString(getString(R.string.sharedPreferences_nickname), "I NEED TO SET A NICKNAME");
 
         // Load in the saved local high scores
         retrieveLocalScores();
 
         // Check if we need to run the firstTimeSetup() or initialLaunchSetup() methods
-        if (isItFirst || forceFirstTimeSetup) {
+        if (isItFirst || mForceFirstTimeSetup) {
             firstTimeSetup();
         }
-        if (isInitialLaunch || forceInitialLaunchSetup) {
+        if (isInitialLaunch || mForceInitialLaunchSetup) {
             initialLaunchSetup();
         }
 
@@ -76,6 +78,8 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the game activity by creating an intent to start it
                 Intent myIntent = new Intent(MainMenu.this, GameActivity.class);
+                myIntent.putExtra("nickname", mUserNickname);
+                myIntent.putExtra("uniqueUserId", mUniqueUserId);
                 startActivity(myIntent);
             }
         });
@@ -86,6 +90,7 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the settings menu activity by creating an intent to start it
                 Intent myIntent = new Intent(MainMenu.this, SettingsMenu.class);
+                myIntent.putExtra("uniqueUserId", mUniqueUserId);
                 startActivity(myIntent);
             }
         });
@@ -96,6 +101,8 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the high scores menu activity by creating an intent to start it
                 Intent myIntent = new Intent(MainMenu.this, ScoresMenu.class);
+                myIntent.putExtra("nickname", mUserNickname);
+                myIntent.putExtra("uniqueUserId", mUniqueUserId);
                 startActivity(myIntent);
             }
         });
@@ -132,12 +139,18 @@ public class MainMenu extends AppCompatActivity {
         SharedPreferences.Editor editor = sSharedPref.edit();
         editor.putString(getString(R.string.sharedPreferences_uniqueId), mUniqueUserId);
         editor.putBoolean(getString(R.string.sharedPreferences_firstTime), false);
-        editor.putInt(getString(R.string.sharedPreferences_highscoreOne), 0);
-        editor.putInt(getString(R.string.sharedPreferences_highscoreTwo), 0);
-        editor.putInt(getString(R.string.sharedPreferences_highscoreThree), 0);
-        editor.putInt(getString(R.string.sharedPreferences_highscoreFour), 0);
-        editor.putInt(getString(R.string.sharedPreferences_highscoreFive), 0);
+        Highscore defaultScore = new Highscore(0, mUserNickname, mUniqueUserId);
+        if (sLocalHighScores == null) {
+            sLocalHighScores = new ArrayList<>();
+        }
+        sLocalHighScores.clear();
+        for(int i = 0; i < 5; i++) {
+            sLocalHighScores.add(defaultScore);
+        }
+        saveLocalHighScores();
+        // Apply the edits
         editor.apply();
+
         Log.i(TAG, "Unique User ID Generated: " + mUniqueUserId);
     }
 
@@ -165,44 +178,22 @@ public class MainMenu extends AppCompatActivity {
      * Retrieves the local high scores
      */
     public void retrieveLocalScores() {
+        Gson gson = new Gson();
+        String json = sSharedPref.getString("sLocalHighScores", "");
+        Type type = new TypeToken<List<Highscore>>(){}.getType();
+        sLocalHighScores = gson.fromJson(json, type);
+    }
 
-        Log.i(TAG, "Local scores were just retrieved");
-
-        Integer[] toSort = new Integer[] {
-                sSharedPref.getInt(getString(R.string.sharedPreferences_highscoreOne), -5),
-                sSharedPref.getInt(getString(R.string.sharedPreferences_highscoreTwo), -5),
-                sSharedPref.getInt(getString(R.string.sharedPreferences_highscoreThree), -5),
-                sSharedPref.getInt(getString(R.string.sharedPreferences_highscoreFour), -5),
-                sSharedPref.getInt(getString(R.string.sharedPreferences_highscoreFive), -5)
-        };
-
-        // Sort the Array...
-        Arrays.sort(toSort);
-        Collections.reverse(Arrays.asList(toSort));
-
-        for (Integer i: toSort) {
-            Log.i(TAG, "toSort value: " + i);
-        }
-
-        // Have sLocalHighScoreNums now be the sorted array
-        MainMenu.sLocalHighScoresNums = toSort;
-
-        for (Integer i: MainMenu.sLocalHighScoresNums) {
-            Log.i(TAG, "From Retrieve: localHighScoreNums value: " + i);
-        }
-
-        // Load in each of the five saved high score values
-        sLocalHighScores = new String[] {
-                MainMenu.sUserNickname + "                                            " +
-                        toSort[0],
-                MainMenu.sUserNickname + "                                            " +
-                        toSort[1],
-                MainMenu.sUserNickname + "                                            " +
-                        toSort[2],
-                MainMenu.sUserNickname + "                                            " +
-                        toSort[3],
-                MainMenu.sUserNickname + "                                            " +
-                        toSort[4] };
+    /**
+     * Writes whatever is in localHighScores to memory
+     */
+    public static void saveLocalHighScores() {
+        SharedPreferences.Editor editor = sSharedPref.edit();
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Highscore>>(){}.getType();
+        String json = gson.toJson(sLocalHighScores, type);
+        editor.putString("sLocalHighScores", json);
+        editor.apply();
     }
 
     // Connects to remote server to grab the global scores

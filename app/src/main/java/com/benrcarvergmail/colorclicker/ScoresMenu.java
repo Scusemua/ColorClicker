@@ -1,5 +1,6 @@
 package com.benrcarvergmail.colorclicker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+
+import java.util.ArrayList;
 
 /**
  * Created by Benjamin on 4/10/2016.
@@ -21,20 +24,39 @@ public class ScoresMenu extends AppCompatActivity {
     private ArrayAdapter<String> mLocalAdapter;     // ArrayAdapter for the local ListView
     private ArrayAdapter<String> mGlobalAdapter;    // ArrayAdapter for the global ListView
 
-    private String[] mHighScoresLocal = MainMenu.sLocalHighScores;      // List of local high scores
-    private String[] mHighScoresGlobal = MainMenu.sGlobalHighScores;    // List of global high scores
+    private String mNickname;                       // The user's nickname
+    private String mUniqueUserId;                   // The user's unique user id
+
+    // List of local high scores and nicknames
+    private ArrayList<String> mHighScoresLocal = new ArrayList<>();
+    // List of global high scores and nicknames
+    private ArrayList<String> mHighScoresGlobal = new ArrayList<>();
 
     private final String TAG = "ColorClickerScoreMenu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent myIntent = getIntent();
+        mNickname = myIntent.getStringExtra("nickname");
+        mUniqueUserId = myIntent.getStringExtra("uniqueUserId");
         setContentView(R.layout.activity_scoresmenu);
 
         // Instantiate references to necessary views
         mListViewLocal = (ListView) findViewById(R.id.listViewLocal);
         mListViewGlobal = (ListView) findViewById(R.id.listViewGlobal);
         mToggleListViews = (ToggleButton) findViewById(R.id.togglebutton_listViews);
+
+        // Add the scores to the ArrayList
+        for(int i = 0; i < MainMenu.sLocalHighScores.size(); i++) {
+            mHighScoresLocal.add(mNickname + "                                       " + MainMenu.sLocalHighScores.get(i).getScore());
+        }
+
+        // Add the scores to the ArrayList
+        for(int i = 0; i < MainMenu.sGlobalHighScores.size(); i++) {
+            mHighScoresGlobal.add(mNickname + "                                       " + MainMenu.sGlobalHighScores.get(i).getScore());
+        }
+
 
         // Instantiate the adapters
         mLocalAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_layout, mHighScoresLocal);

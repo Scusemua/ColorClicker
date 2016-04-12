@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout_rootLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e79dff">
+
+    <TextView
+        android:id="@+id/textview_titleTextMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/textview_colorChooserTitle"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <RelativeLayout
+        android:layout_width="325dp"
+        android:layout_height="101dp"
+        android:layout_gravity="center_horizontal"
+        android:elevation="5dp"
+        android:background="#e4e4e4">
+
+        <TextView
+            android:id="@+id/colorlabel_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="15dp"/>
+
+        <CheckBox
+            android:id="@+id/colorcheckbox_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable color"
+            android:layout_below="@id/colorlabel_red"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"/>
+
+        <View
+            android:id="@+id/colorview_red"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/red"
+            android:layout_margin="13dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

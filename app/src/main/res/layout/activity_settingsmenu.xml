@@ -57,15 +57,32 @@
         android:layout_marginBottom="10dp"
         android:background="?android:attr/listDivider" />
 
-    <ToggleButton
-        android:id="@+id/togglebutton_sound"
-        android:textOn="@string/toggle_soundOn"
-        android:textOff="@string/toggle_soundOff"
-        android:layout_gravity="center_horizontal"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center_horizontal">
+
+        <ToggleButton
+            android:id="@+id/togglebutton_sound"
+            android:textOn="@string/toggle_soundOn"
+            android:textOff="@string/toggle_soundOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:layout_marginEnd="25dp"/>
+
+        <Button
+            android:id="@+id/button_pickerColors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_colorChooser"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

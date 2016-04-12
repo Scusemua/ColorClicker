@@ -1,7 +1,6 @@
 package com.benrcarvergmail.colorclicker;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
@@ -28,8 +28,9 @@ public class GameActivity extends AppCompatActivity {
     private int mPoints;               // Variable for the number of points the user has
     private boolean mInNeedOfReset;    // Used to identify whether or not its time to reset
     private boolean mLeftIsCorrect;    // Used to specify which TextView was supposed to be clicked
-
     private boolean mFirstClick = true;      // Used to identify whether or not its the first click
+    private String mNickname;           // The user's nickname
+    private String mUniqueUserId;       // The user's unique id
 
     private final String TAG = "ColorClickerGame";
 
@@ -37,6 +38,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        mNickname = intent.getStringExtra("nickname");
+        mUniqueUserId = intent.getStringExtra("uniqueUserId");
         setContentView(R.layout.activity_game);
 
         // Create references to the various TextView objects
@@ -250,58 +253,31 @@ public class GameActivity extends AppCompatActivity {
         mRightText.setText(R.string.right_pregame);
         mInNeedOfReset = true;
 
-        Integer score = Integer.parseInt(mPointsCounter.getText().toString());
+        // Grab the value of the player's current score and store it in an int variable
+        int score = Integer.parseInt(mPointsCounter.getText().toString());
 
-        Log.i(TAG, "Score: " + score);
+        // Create a local reference to the list of local high scores for convenience's sake
+        ArrayList<Highscore> localListOfHighscores = MainMenu.sLocalHighScores;
 
-        // Will convert this to a nicer looking loop later. I just needed something working and this works, somehow.
-        // TODO: Fix this god-awful mess
-        for(int i = 0; i < MainMenu.sLocalHighScoresNums.length; i++) {
-            Log.i(TAG, "i: " + i + ", sLocalHighScoresNums value: " + MainMenu.sLocalHighScoresNums[i]);
-            if (MainMenu.sLocalHighScoresNums[i] < score) {
-                Log.i(TAG, "Score #" + i + " with value of " + MainMenu.sLocalHighScoresNums[i]
-                        + " is less than " + score);
-                SharedPreferences.Editor editor = MainMenu.sSharedPref.edit();
-                int temp = MainMenu.sLocalHighScoresNums[i];
-                MainMenu.sLocalHighScoresNums[i] = score;
-                String toEdit = "highScore" + (i + 1);
-                Log.i(TAG, "toEdit: " + toEdit);
-                editor.putInt(toEdit, score);
-                if (i + 1 < 5) {
-                    if (MainMenu.sLocalHighScoresNums[i+1] < temp) {
-                        Log.i(TAG, "Score #" + (i + 1) + " with value of " + MainMenu.sLocalHighScoresNums[i + 1]
-                                + " is less than " + temp);
-                        Log.i(TAG, "Value of temp (temp0): " + temp);
-                        int temp2 = MainMenu.sLocalHighScoresNums[i+1];
-                        MainMenu.sLocalHighScoresNums[i+1] = temp;
-                        Log.i(TAG, "Value of temp0: " + temp + ", value of [i+1] or [" + (i + 1) + "]:"  + MainMenu.sLocalHighScoresNums[i+1]);
-                        if (i + 2 < 5) {
-                            if (MainMenu.sLocalHighScoresNums[i+2] < temp2) {
-                                Log.i(TAG, "Score #" + (i + 2) + " with value of " + MainMenu.sLocalHighScoresNums[i + 2]
-                                        + " is less than " + temp2);
-                                int temp3 = MainMenu.sLocalHighScoresNums[i+2];
-                                MainMenu.sLocalHighScoresNums[i+2] = temp2;
-                                if(i + 3 < 5) {
-                                    if (MainMenu.sLocalHighScoresNums[i+3] < temp3) {
-                                        Log.i(TAG, "Score #" + (i + 3) + " with value of " + MainMenu.sLocalHighScoresNums[i + 3]
-                                                + " is less than " + temp3);
-                                        int temp4 = MainMenu.sLocalHighScoresNums[i+3];
-                                        MainMenu.sLocalHighScoresNums[i+3] = temp3;
-                                        if(i + 4 < 5) {
-                                            if(MainMenu.sLocalHighScoresNums[i+4] < temp4) {
-                                                Log.i(TAG, "Score #" + (i + 4) + " with value of " + MainMenu.sLocalHighScoresNums[i + 4]
-                                                        + " is less than " + temp4);
-                                                int temp5 = MainMenu.sLocalHighScoresNums[i+4];
-                                                MainMenu.sLocalHighScoresNums[i+4] = temp4;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+        for(int i = 0; i < localListOfHighscores.size(); i++) {
+            Log.i(TAG, "Outer loop " + i + " out of " + localListOfHighscores.size());
+            if (localListOfHighscores.get(i).getScore() < score) {
+                int oldHighScore = localListOfHighscores.get(i).getScore();
+                Highscore newHighScore = new Highscore(score, mNickname, mUniqueUserId);
+                localListOfHighscores.set(i, newHighScore);
+                for (int j = i; j < localListOfHighscores.size(); j++) {
+                    Log.i(TAG, "Inner loop " + j + " out of " + localListOfHighscores.size());
+                    if (oldHighScore > localListOfHighscores.get(j).getScore()) {
+                        newHighScore = new Highscore(oldHighScore, mNickname, mUniqueUserId);
+                        oldHighScore = localListOfHighscores.get(j).getScore();
+                        localListOfHighscores.set(j, newHighScore);
                     }
                 }
-                editor.apply();
+                // Save the high scores now that they've been modified
+                MainMenu.saveLocalHighScores();
+                // Return because we are now done with manipulating the saved high scores and
+                // if we let the loops continue, scores will be modified in ways we don't want
+                // (i.e. duplicates)
                 return;
             }
         }
