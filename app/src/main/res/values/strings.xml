@@ -26,6 +26,7 @@
     <string name="listview_label_user">Nickname</string>
     <string name="listview_label_score">Score</string>
     <string name="button_colorChooser">Pick Colors</string>
+    <string name="checkbox_enableColor">Enable color</string>
     <string name="textview_colorChooserTitle">Color Chooser</string>
     <string name="delete_content_warning">Warning: deleting your high scores is permanent and
         cannot be reversed. Make sure that you actually want to delete them before pressing

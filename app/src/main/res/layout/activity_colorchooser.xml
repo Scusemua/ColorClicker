@@ -33,10 +33,10 @@
         android:background="#e4e4e4">
 
         <TextView
-            android:id="@+id/colorlabel_red"
+            android:id="@+id/colorlabel_cyan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Red"
+            android:text="Cyan"
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:paddingLeft="20dp"
@@ -44,22 +44,22 @@
             android:paddingTop="15dp"/>
 
         <CheckBox
-            android:id="@+id/colorcheckbox_red"
+            android:id="@+id/colorcheckbox_cyan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable color"
-            android:layout_below="@id/colorlabel_red"
+            android:text="@string/checkbox_enableColor"
+            android:layout_below="@id/colorlabel_cyan"
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"/>
 
         <View
-            android:id="@+id/colorview_red"
-            android:layout_width="75dp"
+            android:id="@+id/view_colorCyan"
+            android:layout_width="150dp"
             android:layout_height="75dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="@color/red"
+            android:background="@color/cyan"
             android:layout_margin="13dp"/>
 
     </RelativeLayout>

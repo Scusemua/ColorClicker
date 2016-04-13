@@ -7,9 +7,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 /**
  * Created by Benjamin on 4/10/2016.
@@ -22,6 +24,7 @@ public class SettingsMenu extends AppCompatActivity {
     private Button mButtonConfirmNickname;       // Reference to the new nickname confirm button
     private Button mButtonDeleteContent;         // Reference to the button used to delete scores
     private Button mButtonPickColors;            // Reference to the button used to pick colors
+    private ToggleButton mToggleSoundButton;     // Reference to the toggle sound button
 
     private String mCurrentNickName;             // The user's current nickname
     private String mUniqueUserId;                // The user's unique user id
@@ -48,6 +51,7 @@ public class SettingsMenu extends AppCompatActivity {
         mButtonConfirmNickname = (Button) findViewById(R.id.button_confirmNickname);
         mButtonDeleteContent = (Button) findViewById(R.id.button_delete_local_content);
         mButtonPickColors = (Button) findViewById(R.id.button_pickerColors);
+        mToggleSoundButton = (ToggleButton) findViewById(R.id.togglebutton_sound);
 
         // Assign the current nickname text view the value of the saved nick name
         mTextViewCurrentNickname.setText("Current nickname: " + mCurrentNickName);
@@ -55,6 +59,19 @@ public class SettingsMenu extends AppCompatActivity {
         // Save the color of the text now, in case the user triggers the warning
         // button which will turn the text white and therefore change the color
         final int oldColor = mWarningText.getCurrentTextColor();
+
+        mToggleSoundButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = mSharedPref.edit();
+                if (isChecked) {
+                    editor.putBoolean("soundEnabled", true);
+                } else {
+                    editor.putBoolean("soundEnabled", false);
+                }
+                editor.apply();
+            }
+        });
 
         mButtonPickColors.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,5 +157,12 @@ public class SettingsMenu extends AppCompatActivity {
         }
         // Save the changes
         MainMenu.saveLocalHighScores();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        boolean enabled = mSharedPref.getBoolean("soundEnabled", true);
+        mToggleSoundButton.setChecked(enabled);
     }
 }

@@ -28,7 +28,8 @@ public class MainMenu extends AppCompatActivity {
     private Button mScoresButton;        // Reference to the high scores button
     private String mUniqueUserId;        // Unique user ID for submitting high scores
     private String mUserNickname;        // Nickname for the user
-    private boolean mForceFirstTimeSetup = true;          // Forces the first time setup method to run
+    private boolean mSoundEnabled;       // Indicates whether sounds are enabled/disabled
+    private boolean mForceFirstTimeSetup = false;         // Forces the first time setup method to run
     private boolean mForceInitialLaunchSetup = false;     // Forces the initial launch setup method to run
 
     // SharedPreferences object for the app
@@ -139,6 +140,7 @@ public class MainMenu extends AppCompatActivity {
         SharedPreferences.Editor editor = sSharedPref.edit();
         editor.putString(getString(R.string.sharedPreferences_uniqueId), mUniqueUserId);
         editor.putBoolean(getString(R.string.sharedPreferences_firstTime), false);
+        editor.putBoolean("soundEnabled", true);
         Highscore defaultScore = new Highscore(0, mUserNickname, mUniqueUserId);
         if (sLocalHighScores == null) {
             sLocalHighScores = new ArrayList<>();
@@ -169,6 +171,7 @@ public class MainMenu extends AppCompatActivity {
         Log.i(TAG, "Initial launch data retrieval and recording complete.");
         sSharedPref = this.getPreferences(Context.MODE_PRIVATE);
         mUniqueUserId = sSharedPref.getString(getString(R.string.sharedPreferences_uniqueId), "UNKNOWN_USER_ID");
+        mSoundEnabled = sSharedPref.getBoolean("soundEnabled", true);
         SharedPreferences.Editor editor = sSharedPref.edit();
         editor.putBoolean(getString(R.string.sharedPreferences_initialLaunch), false);
         editor.apply();

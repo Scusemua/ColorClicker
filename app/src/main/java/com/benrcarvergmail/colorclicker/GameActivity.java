@@ -26,11 +26,13 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer mPlayer;       // SoundPool object to play sound effects
     private TimerController mTimer;    // Responsible for handling the timer
     private int mPoints;               // Variable for the number of points the user has
+    private String mNickname;          // The user's nickname
+    private String mUniqueUserId;      // The user's unique id
     private boolean mInNeedOfReset;    // Used to identify whether or not its time to reset
     private boolean mLeftIsCorrect;    // Used to specify which TextView was supposed to be clicked
+    private boolean mSoundEnabled;     // Indicates whether or not sound is enabled
     private boolean mFirstClick = true;      // Used to identify whether or not its the first click
-    private String mNickname;           // The user's nickname
-    private String mUniqueUserId;       // The user's unique id
+
 
     private final String TAG = "ColorClickerGame";
 
@@ -64,6 +66,9 @@ public class GameActivity extends AppCompatActivity {
         // Pick a random color for the right TextView and save the color in rightColor
         mRightColor = pickFirstColor();
         mRightText.setBackgroundResource(mRightColor.getColorId());
+
+        // Load the SharedPreference data for whether or not sounds are enabled
+        mSoundEnabled = MainMenu.sSharedPref.getBoolean("soundEnabled", true);
 
         // Start time for the timer in milliseconds
         final long startTime = 1150;
@@ -236,7 +241,11 @@ public class GameActivity extends AppCompatActivity {
 
     private void updatePoints() {
         mPoints++;                                          // Increment the player's points
-        mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter
+        mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter\
+        if (mSoundEnabled) {
+            mPlayer = MediaPlayer.create(this, R.raw.blop);
+            mPlayer.start();
+        }
     }
 
     /**
