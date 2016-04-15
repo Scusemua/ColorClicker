@@ -23,9 +23,10 @@ import java.util.UUID;
  */
 public class MainMenu extends AppCompatActivity {
 
-    private Button mPlayButton;          // Reference to the play button
-    private Button mSettingsButton;      // Reference to the settings button
-    private Button mScoresButton;        // Reference to the high scores button
+    private Button mButtonPlay;          // Reference to the play button
+    private Button mButtonSettings;      // Reference to the settings button
+    private Button mButtonScores;        // Reference to the high scores button
+    private Button mButtonStats;         // Button for accessing achievements
     private String mUniqueUserId;        // Unique user ID for submitting high scores
     private String mUserNickname;        // Nickname for the user
     private boolean mSoundEnabled;       // Indicates whether sounds are enabled/disabled
@@ -49,9 +50,10 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
         // Instantiate references to necessary views
-        mPlayButton = (Button) findViewById(R.id.button_play);
-        mSettingsButton = (Button) findViewById(R.id.button_settings);
-        mScoresButton = (Button) findViewById(R.id.button_scores);
+        mButtonPlay = (Button) findViewById(R.id.button_play);
+        mButtonSettings = (Button) findViewById(R.id.button_settings);
+        mButtonScores = (Button) findViewById(R.id.button_scores);
+        mButtonStats = (Button) findViewById(R.id.button_stats);
 
         // Instantiate the shared preferences object.
         sSharedPref = this.getPreferences(Context.MODE_PRIVATE);
@@ -73,8 +75,17 @@ public class MainMenu extends AppCompatActivity {
             initialLaunchSetup();
         }
 
+        // onClickListener() for the "Stats" (Achievements) button
+        mButtonStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainMenu.this, AchievementsMenu.class);
+                startActivity(myIntent);
+            }
+        });
+
         // onClickListener() for the "Play" button
-        mPlayButton.setOnClickListener(new View.OnClickListener() {
+        mButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the game activity by creating an intent to start it
@@ -86,7 +97,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         // onClickListener() for the "Settings" button
-        mSettingsButton.setOnClickListener(new View.OnClickListener() {
+        mButtonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the settings menu activity by creating an intent to start it
@@ -97,7 +108,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         // onClickListener() for the "High Scores" button
-        mScoresButton.setOnClickListener(new View.OnClickListener() {
+        mButtonScores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the high scores menu activity by creating an intent to start it
@@ -129,6 +140,7 @@ public class MainMenu extends AppCompatActivity {
         }
         // Update the local scores since they've quite possibly changed
         retrieveLocalScores();
+        mUserNickname = sSharedPref.getString(getString(R.string.sharedPreferences_nickname), "NO NICKNAME SET");
     }
 
     /**

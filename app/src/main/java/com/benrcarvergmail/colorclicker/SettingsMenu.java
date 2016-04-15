@@ -2,6 +2,7 @@ package com.benrcarvergmail.colorclicker;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,13 @@ public class SettingsMenu extends AppCompatActivity {
                 SharedPreferences.Editor editor = mSharedPref.edit();
                 if (isChecked) {
                     editor.putBoolean("soundEnabled", true);
+                    final MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.blop);
+                    mPlayer.start();
+                    mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                        public void onCompletion(MediaPlayer player) {
+                            mPlayer.release();
+                        }
+                    });
                 } else {
                     editor.putBoolean("soundEnabled", false);
                 }

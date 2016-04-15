@@ -176,6 +176,10 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Load the SharedPreference data for whether or not sounds are enabled
+        mSoundEnabled = MainMenu.sSharedPref.getBoolean("soundEnabled", true);
+        // Load in the set nickname in case the user has since changed it
+        mNickname = MainMenu.sSharedPref.getString(getString(R.string.sharedPreferences_nickname), "NO NICKNAME SET");
     }
 
     @Override
@@ -241,10 +245,15 @@ public class GameActivity extends AppCompatActivity {
 
     private void updatePoints() {
         mPoints++;                                          // Increment the player's points
-        mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter\
+        mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter
         if (mSoundEnabled) {
             mPlayer = MediaPlayer.create(this, R.raw.blop);
             mPlayer.start();
+            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                public void onCompletion(MediaPlayer player) {
+                    mPlayer.release();
+                }
+            });
         }
     }
 
@@ -272,13 +281,15 @@ public class GameActivity extends AppCompatActivity {
             Log.i(TAG, "Outer loop " + i + " out of " + localListOfHighscores.size());
             if (localListOfHighscores.get(i).getScore() < score) {
                 int oldHighScore = localListOfHighscores.get(i).getScore();
+                String oldNickName = localListOfHighscores.get(i).getNickname();
                 Highscore newHighScore = new Highscore(score, mNickname, mUniqueUserId);
                 localListOfHighscores.set(i, newHighScore);
                 for (int j = i; j < localListOfHighscores.size(); j++) {
                     Log.i(TAG, "Inner loop " + j + " out of " + localListOfHighscores.size());
                     if (oldHighScore > localListOfHighscores.get(j).getScore()) {
-                        newHighScore = new Highscore(oldHighScore, mNickname, mUniqueUserId);
+                        newHighScore = new Highscore(oldHighScore, oldNickName, mUniqueUserId);
                         oldHighScore = localListOfHighscores.get(j).getScore();
+                        oldNickName = localListOfHighscores.get(j).getNickname();
                         localListOfHighscores.set(j, newHighScore);
                     }
                 }

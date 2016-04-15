@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#88ffa6">
+    android:background="@color/colorBackgroundStandard">
 
     <TextView
         android:id="@+id/textview_titleTextMainMenu"

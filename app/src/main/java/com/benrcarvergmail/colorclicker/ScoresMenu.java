@@ -32,7 +32,7 @@ public class ScoresMenu extends AppCompatActivity {
     // List of global high scores and nicknames
     private ArrayList<String> mHighScoresGlobal = new ArrayList<>();
 
-    private final String TAG = "ColorClickerScoreMenu";
+    private static final String TAG = "ColorClickerScoreMenu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +49,12 @@ public class ScoresMenu extends AppCompatActivity {
 
         // Add the scores to the ArrayList
         for(int i = 0; i < MainMenu.sLocalHighScores.size(); i++) {
-            mHighScoresLocal.add(mNickname + "                                       " + MainMenu.sLocalHighScores.get(i).getScore());
+            mHighScoresLocal.add(MainMenu.sLocalHighScores.get(i).getNickname() + "                                       " + MainMenu.sLocalHighScores.get(i).getScore());
         }
 
         // Add the scores to the ArrayList
         for(int i = 0; i < MainMenu.sGlobalHighScores.size(); i++) {
-            mHighScoresGlobal.add(mNickname + "                                       " + MainMenu.sGlobalHighScores.get(i).getScore());
+            mHighScoresGlobal.add(MainMenu.sLocalHighScores.get(i).getNickname() + "                                       " + MainMenu.sGlobalHighScores.get(i).getScore());
         }
 
 

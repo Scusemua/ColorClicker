@@ -28,6 +28,7 @@
     <string name="button_colorChooser">Pick Colors</string>
     <string name="checkbox_enableColor">Enable color</string>
     <string name="textview_colorChooserTitle">Color Chooser</string>
+    <string name="button_stats">Achievements</string>
     <string name="delete_content_warning">Warning: deleting your high scores is permanent and
         cannot be reversed. Make sure that you actually want to delete them before pressing
         that button right there. There is nothing the developer or anybody else in the entire

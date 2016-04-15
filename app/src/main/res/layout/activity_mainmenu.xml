@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
+    android:background="@color/colorBackgroundMain"
     android:weightSum="6">
 
     <TextView
@@ -46,6 +46,17 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:text="@string/settings_button"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@drawable/button_text_color"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/button_stats"
+        android:layout_width="325dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/button_stats"
         android:textStyle="bold"
         android:textSize="36sp"
         android:textColor="@drawable/button_text_color"
