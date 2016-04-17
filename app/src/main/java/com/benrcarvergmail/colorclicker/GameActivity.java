@@ -104,6 +104,9 @@ public class GameActivity extends AppCompatActivity {
                     if (mLeftIsCorrect) {
                         // Call updatePoints(true), incrementing the points
                         updatePoints();
+                        // Update the statistic for the number of whatever color was clicked by
+                        // referencing the proper achievement using the color's name
+                        Achievements.updateNumericalAchievement("achievementTotal" + mLeftColor.getColorName(), 1, false);
                         // We need the timer to restart since the user did not lose
                         mTimer.setNeedReset(true);
                         Log.i(TAG, "LEFT was clicked.");
@@ -113,6 +116,11 @@ public class GameActivity extends AppCompatActivity {
                         // The user lost the game so just stop the timer for now
                         mTimer.cancel();
                         loseGame(R.string.game_lost_because_wrong);
+                        // Update the statistical value for the number of incorrectly clicked colors
+                        Achievements.updateNumericalAchievement("achievementTotalClickedBad", 1, false);
+                        // Update the statistic for the number of whatever color was clicked by
+                        // referencing the proper achievement using the color's name
+                        Achievements.updateNumericalAchievement("achievementTotal" + mLeftColor.getColorName(), 1, false);
                         Log.i(TAG, "LEFT was clicked.");
                         Log.i(TAG, "Value of leftIsCorrect: " + mLeftIsCorrect);
                     }
@@ -147,11 +155,19 @@ public class GameActivity extends AppCompatActivity {
                         mTimer.cancel();
                         // Call updatePoints(false), which will handle the user losing the game
                         loseGame(R.string.game_lost_because_wrong);
+                        // Update the statistical value for the number of incorrectly clicked colors
+                        Achievements.updateNumericalAchievement("achievementTotalClickedBad", 1, false);
+                        // Update the statistic for the number of whatever color was clicked by
+                        // referencing the proper achievement using the color's name
+                        Achievements.updateNumericalAchievement("achievementTotal" + mRightColor.getColorName(), 1, false);
                         Log.i(TAG, "RIGHT was clicked.");
                         Log.i(TAG, "Value of leftIsCorrect: " + mLeftIsCorrect);
                     } else {
                         // Call updatePoints(true), incrementing the points
                         updatePoints();
+                        // Update the statistic for the number of whatever color was clicked by
+                        // referencing the proper achievement using the color's name
+                        Achievements.updateNumericalAchievement("achievementTotal" + mRightColor.getColorName(), 1, false);
                         // We need the timer to restart since the user did not lose
                         mTimer.setNeedReset(true);
                         Log.i(TAG, "RIGHT was clicked.");
@@ -243,6 +259,10 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Updates the players points, plays the sound for pressing the right color (if enabled),
+     * and updates the total correctly clicked colors statistic and the current points the user has.
+     */
     private void updatePoints() {
         mPoints++;                                          // Increment the player's points
         mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter
@@ -255,6 +275,11 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
         }
+        // Update the statistical value for the total number of colors clicked as well
+        // as the current points of the user by one. False indicates that we want to add to
+        // the statistical value, not replace it with a value.
+        Achievements.updateNumericalAchievement("achievementTotalClickedGood", 1, false);
+        Achievements.updateNumericalAchievement("achievementCurrentPoints", 1, false);
     }
 
     /**

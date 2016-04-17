@@ -25,6 +25,7 @@ public class SettingsMenu extends AppCompatActivity {
     private Button mButtonConfirmNickname;       // Reference to the new nickname confirm button
     private Button mButtonDeleteContent;         // Reference to the button used to delete scores
     private Button mButtonPickColors;            // Reference to the button used to pick colors
+    private Button mHelpButton;                  // Reference to the button that displays help
     private ToggleButton mToggleSoundButton;     // Reference to the toggle sound button
 
     private String mCurrentNickName;             // The user's current nickname
@@ -53,6 +54,7 @@ public class SettingsMenu extends AppCompatActivity {
         mButtonDeleteContent = (Button) findViewById(R.id.button_delete_local_content);
         mButtonPickColors = (Button) findViewById(R.id.button_pickerColors);
         mToggleSoundButton = (ToggleButton) findViewById(R.id.togglebutton_sound);
+        mHelpButton = (Button) findViewById(R.id.button_settingsHelp);
 
         // Assign the current nickname text view the value of the saved nick name
         mTextViewCurrentNickname.setText("Current nickname: " + mCurrentNickName);

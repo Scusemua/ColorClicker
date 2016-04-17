@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:textSize="58sp"
         android:textColor="@android:color/white"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="45dp"/>
 
     <Button

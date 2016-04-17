@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -80,6 +81,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(MainMenu.this, AchievementsMenu.class);
+                myIntent.putExtra("nickname", mUserNickname);
                 startActivity(myIntent);
             }
         });
@@ -148,23 +150,36 @@ public class MainMenu extends AppCompatActivity {
      */
     private void firstTimeSetup() {
         Log.i(TAG, "First time data created.");
-        mUniqueUserId = UUID.randomUUID().toString();
-        SharedPreferences.Editor editor = sSharedPref.edit();
-        editor.putString(getString(R.string.sharedPreferences_uniqueId), mUniqueUserId);
+        mUniqueUserId = UUID.randomUUID().toString();           // Generate a unique user id code
+        SharedPreferences.Editor editor = sSharedPref.edit();   // Create an editor for SharedPref
+        editor.putString(getString(R.string.sharedPreferences_uniqueId), mUniqueUserId);            // Save the unique user id
+        // Establish that it is no longer the first time
         editor.putBoolean(getString(R.string.sharedPreferences_firstTime), false);
-        editor.putBoolean("soundEnabled", true);
+        editor.putBoolean("soundEnabled", true);                // Enable sound
+        // Create a default high score object to create the high scores
         Highscore defaultScore = new Highscore(0, mUserNickname, mUniqueUserId);
-        if (sLocalHighScores == null) {
+        if (sLocalHighScores == null) { // Instantiate the high scores list
             sLocalHighScores = new ArrayList<>();
         }
-        sLocalHighScores.clear();
-        for(int i = 0; i < 5; i++) {
+        sLocalHighScores.clear();       // Populate the high scores list. We clear it first in
+        for(int i = 0; i < 5; i++) {    // case we're debugging and force the first time to run.
+                                        // If we didn't clear it, the list would have these added
+                                        // to the end of an already populated list of scores.
             sLocalHighScores.add(defaultScore);
         }
-        saveLocalHighScores();
+        saveLocalHighScores();  // Save the high scores
         // Apply the edits
-        editor.apply();
+        editor.apply(); // Apply the edits
 
+        // Display a Toast message, notifying the user to set their nickname
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), "Make sure to set your nickname in the SETTINGS menu!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Debugging log information
         Log.i(TAG, "Unique User ID Generated: " + mUniqueUserId);
     }
 

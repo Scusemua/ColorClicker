@@ -29,13 +29,31 @@
     <string name="checkbox_enableColor">Enable color</string>
     <string name="textview_colorChooserTitle">Color Chooser</string>
     <string name="button_stats">Achievements</string>
+    <string name="defaultmTextViewTotalClickedGood">Total clicked correctly: </string>
+    <string name="defaultmTextViewTotalClickedBad">Total clicked incorrectly: </string>
+    <string name="defaultmTextViewRed">Red: </string>
+    <string name="defaultmTextViewBlue">Blue: </string>
+    <string name="defaultmTextViewGreen">Green: </string>
+    <string name="defaultmTextViewOrange">Orange: </string>
+    <string name="defaultmTextViewYellow">Yellow: </string>
+    <string name="defaultmTextViewPink">Pink: </string>
+    <string name="defaultmTextViewPurple">Purple: </string>
+    <string name="defaultmTextViewWhite">White: </string>
+    <string name="defaultmTextViewNickname">Current nickname: </string>
+    <string name="defaultmTextViewCurrentPoints">Current points: </string>
+    <string name="defaultmTextViewTotalPointsSpent">Total points spent: </string>
+    <string name="defaultmTextViewNewColorsBought">Number of new colors bought: </string>
+    <string name="textview_statTotalColorClickedLabel">Number Clicked Per Color </string>
+    <string name="textview_statGeneralStats">General Stats </string>
+    <string name="textview_statMiscStats">Misc. Stats </string>
+    <string name="help_button">\?</string>
+    <string name="sharedPreferences_nickname">nickname</string>
+    <string name="sharedPreferences_firstTime">firstTime</string>
+    <string name="sharedPreferences_uniqueId">uniqueId</string>
+    <string name="sharedPreferences_initialLaunch">initialLaunch</string>
     <string name="delete_content_warning">Warning: deleting your high scores is permanent and
         cannot be reversed. Make sure that you actually want to delete them before pressing
         that button right there. There is nothing the developer or anybody else in the entire
         world can do to get your precious, hard-earned high scores back after you delete them.</string>
 
-    <string name="sharedPreferences_nickname">nickname</string>
-    <string name="sharedPreferences_firstTime">firstTime</string>
-    <string name="sharedPreferences_uniqueId">uniqueId</string>
-    <string name="sharedPreferences_initialLaunch">initialLaunch</string>
 </resources>

@@ -138,4 +138,19 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp" />
 
+    <Button
+        android:id="@+id/button_settingsHelp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:elevation="4dp"
+        android:layout_gravity="end"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:text="@string/help_button"
+        android:background="@drawable/round_button"/>
+
 </LinearLayout>
