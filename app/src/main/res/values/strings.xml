@@ -29,7 +29,7 @@
     <string name="button_colorChooser">Pick Colors</string>
     <string name="checkbox_enableColor">Enable color</string>
     <string name="textview_colorChooserTitle">Color Chooser</string>
-    <string name="button_stats">Achievements</string>
+    <string name="button_stats">Statistics</string>
     <string name="defaultmTextViewTotalClickedGood">Total clicked correctly: </string>
     <string name="defaultmTextViewTotalClickedBad">Total clicked incorrectly: </string>
     <string name="defaultmTextViewRed">Red: </string>
