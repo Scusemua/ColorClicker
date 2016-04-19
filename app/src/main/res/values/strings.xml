@@ -1,16 +1,17 @@
 <resources>
     <string name="app_name">Color Clicker</string>
-    <string name="left_color">Click me!</string>
-    <string name="right_color">No, click me!</string>
+    <string name="left_color">Click either to begin!</string>
+    <string name="right_color">Click either to begin!</string>
     <string name="default_timer">Timer&#8230;</string>
     <string name="timer_timesup">Times up!</string>
     <string name="welcome_text">Welcome to Color Clicker!</string>
-    <string name="left_pregame">Click me!</string>
-    <string name="right_pregame">No, click me!</string>
+    <string name="left_pregame">Click either!</string>
+    <string name="right_pregame">Click either!</string>
     <string name="press_to_start">Press to start!</string>
+    <string name="press_to_restart">Press to restart!</string>
     <string name="game_lost_generic">You lose!</string>
     <string name="game_lost_because_wrong">Wrong!</string>
-    <string name="game_lost_because_time">Times up!</string>
+    <string name="game_lost_because_time">Time\'s up!</string>
     <string name="play_button">Play Game</string>
     <string name="settings_button">Settings</string>
     <string name="high_scores_button">High Scores</string>
@@ -46,6 +47,8 @@
     <string name="textview_statTotalColorClickedLabel">Number Clicked Per Color </string>
     <string name="textview_statGeneralStats">General Stats </string>
     <string name="textview_statMiscStats">Misc. Stats </string>
+    <string name="vibrate_on">Vibration On</string>
+    <string name="vibrate_off">Vibration Off</string>
     <string name="help_button">\?</string>
     <string name="sharedPreferences_nickname">nickname</string>
     <string name="sharedPreferences_firstTime">firstTime</string>

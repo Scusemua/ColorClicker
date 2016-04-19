@@ -46,31 +46,45 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <TextView
-            android:id="@+id/textview_left"
+        <FrameLayout
+            android:id="@+id/framelayout_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/customborder"
-            android:text="@string/left_color"
-            android:layout_weight="1"
-            android:gravity="center"
-            style="@style/TextShadow"/>
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/textview_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/left_color"
+                android:gravity="center"
+                style="@style/TextShadow"/>
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/textview_right"
+        <FrameLayout
+            android:id="@+id/framelayout_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/customborder"
-            android:text="@string/right_color"
-            android:layout_weight="1"
-            android:gravity="center"
-            style="@style/TextShadow"/>
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/textview_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/right_color"
+                android:gravity="center"
+                style="@style/TextShadow"/>
+        </FrameLayout>
 
     </LinearLayout>
 </LinearLayout>

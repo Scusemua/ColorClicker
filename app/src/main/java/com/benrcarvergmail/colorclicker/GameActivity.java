@@ -3,11 +3,13 @@ package com.benrcarvergmail.colorclicker;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,8 +33,13 @@ public class GameActivity extends AppCompatActivity {
     private boolean mInNeedOfReset;    // Used to identify whether or not its time to reset
     private boolean mLeftIsCorrect;    // Used to specify which TextView was supposed to be clicked
     private boolean mSoundEnabled;     // Indicates whether or not sound is enabled
+    private boolean mVibrationEnabled; // Indicates whether or not vibration is enabled
+    private FrameLayout mLeftFrameLayout;    // Reference to the left FrameLayout
+    private FrameLayout mRightFrameLayout;   // Reference to the right FrameLayout
     private boolean mFirstClick = true;      // Used to identify whether or not its the first click
 
+    // Establish a reference to the system's vibration controller
+    private Vibrator mVibrator;
 
     private final String TAG = "ColorClickerGame";
 
@@ -50,6 +57,10 @@ public class GameActivity extends AppCompatActivity {
         mRightText = (TextView) findViewById(R.id.textview_right);
         mPointsCounter = (TextView) findViewById(R.id.textview_counter);
         mTimerText = (TextView) findViewById(R.id.textview_timer);
+        mLeftFrameLayout = (FrameLayout) findViewById(R.id.framelayout_left);
+        mRightFrameLayout = (FrameLayout) findViewById(R.id.framelayout_right);
+
+        mVibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
 
         // Assign the points counter's text to the points variable
         mPoints = 0;
@@ -61,14 +72,15 @@ public class GameActivity extends AppCompatActivity {
         // Pick a random color for the left TextView and save the color in leftColor
         mLeftColor = pickFirstColor();
         // Set mLeftText's background to be the generated color
-        mLeftText.setBackgroundResource(mLeftColor.getColorId());
+        mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
 
         // Pick a random color for the right TextView and save the color in rightColor
         mRightColor = pickFirstColor();
-        mRightText.setBackgroundResource(mRightColor.getColorId());
+        mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
 
-        // Load the SharedPreference data for whether or not sounds are enabled
+        // Load the SharedPreference data for whether or not sounds and vibrations are enabled
         mSoundEnabled = MainMenu.sSharedPref.getBoolean("soundEnabled", true);
+        mVibrationEnabled = MainMenu.sSharedPref.getBoolean("vibrationEnabled", true);
 
         // Start time for the timer in milliseconds
         final long startTime = 1150;
@@ -91,12 +103,16 @@ public class GameActivity extends AppCompatActivity {
                     Log.i(TAG, "mFirstClick true for left text");
                     mTimer.resetTimer();         // Start the timer
                     mFirstClick = false;    // It is no longer the first click
+                    // Reset points to zero
+                    mPoints = 0;
+                    // Update the point counter
+                    mPointsCounter.setText(String.valueOf(mPoints));
                     updateTextViews();
                     return;
                 }
 
                 // Determine whether or not we need to reset the game...
-                if (!mFirstClick && mInNeedOfReset) {
+                if (mInNeedOfReset) {
                     resetGame();    // Reset the game
                 }
 
@@ -140,12 +156,16 @@ public class GameActivity extends AppCompatActivity {
                     Log.i(TAG, "mFirstClick true for right text");
                     mTimer.resetTimer();         // Start the timer
                     mFirstClick = false;    // It is no longer the first click
+                    // Reset points to zero
+                    mPoints = 0;
+                    // Update the point counter
+                    mPointsCounter.setText(String.valueOf(mPoints));
                     updateTextViews();
                     return;
                 }
 
                 // Determine whether or not we need to reset the game (won't be on first click)
-                if (!mFirstClick && mInNeedOfReset) {
+                if (mInNeedOfReset) {
                     resetGame();    // Reset the game
                 }
 
@@ -192,8 +212,9 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Load the SharedPreference data for whether or not sounds are enabled
+        // Load the SharedPreference data for whether or not sounds and vibrations are enabled
         mSoundEnabled = MainMenu.sSharedPref.getBoolean("soundEnabled", true);
+        mVibrationEnabled = MainMenu.sSharedPref.getBoolean("vibrationEnabled", true);
         // Load in the set nickname in case the user has since changed it
         mNickname = MainMenu.sSharedPref.getString(getString(R.string.sharedPreferences_nickname), "NO NICKNAME SET");
     }
@@ -236,8 +257,8 @@ public class GameActivity extends AppCompatActivity {
         mRightColor = pickRandomColor();
 
         // Update the TextViews' background colors
-        mLeftText.setBackgroundResource(mLeftColor.getColorId());
-        mRightText.setBackgroundResource(mRightColor.getColorId());
+        mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
+        mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
 
         Random RNG = new Random();      // Create a new Random Number Generator
         int rand = RNG.nextInt(2) + 1;  // Generate a number, either 1 or 2 (I like 1 and 2)
@@ -266,8 +287,10 @@ public class GameActivity extends AppCompatActivity {
     private void updatePoints() {
         mPoints++;                                          // Increment the player's points
         mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter
+
+        // Ensure sound is enabled before playing sounds
         if (mSoundEnabled) {
-            mPlayer = MediaPlayer.create(this, R.raw.blop);
+            mPlayer = MediaPlayer.create(this, R.raw.ding);
             mPlayer.start();
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
                 public void onCompletion(MediaPlayer player) {
@@ -291,10 +314,32 @@ public class GameActivity extends AppCompatActivity {
         // Ensure the mTimerText displays zero. This is because that, even though it may
         // reach zero, it will not always display zero at the end because of how it updates.
         mTimerText.setText("0ms");
-        // Tell the game that it needs to reset everything since the player lost
-        mLeftText.setText(R.string.left_pregame);
-        mRightText.setText(R.string.right_pregame);
         mInNeedOfReset = true;
+
+        // Ensure vibration is enabled before vibrating
+        if (mVibrationEnabled) {
+            mVibrator.vibrate(500);
+        }
+
+        // Ensure sound is enabled before playing sounds
+        if (mSoundEnabled) {
+            // Play the sound for clicking the wrong color
+            mPlayer = MediaPlayer.create(this, R.raw.wrong);
+            mPlayer.start();
+            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                public void onCompletion(MediaPlayer player) {
+                    mPlayer.release();
+                }
+            });
+        }
+
+        if (mLeftIsCorrect) {
+            // mLeftText.setBackgroundResource(R.drawable.border_correct);
+            mRightText.setBackgroundResource(R.drawable.wrong_answer_x2);
+        } else {
+            mLeftText.setBackgroundResource(R.drawable.wrong_answer_x2);
+            // mRightText.setBackgroundResource(R.drawable.border_correct);
+        }
 
         // Grab the value of the player's current score and store it in an int variable
         int score = Integer.parseInt(mPointsCounter.getText().toString());
@@ -332,10 +377,11 @@ public class GameActivity extends AppCompatActivity {
      * Resets everything needed to be reset to its default value
      */
     private void resetGame() {
-        // Reset points to zero
-        mPoints = 0;
-        // Update the point counter
-        mPointsCounter.setText(String.valueOf(mPoints));
+        // Update TextViews
+        mLeftText.setText(R.string.press_to_restart);
+        mLeftText.setBackgroundResource(0);
+        mRightText.setText(R.string.press_to_restart);
+        mRightText.setBackgroundResource(0);
         // Reset the title text's text and text color
         mTitleText.setText(R.string.app_name);
         // Reset the title text's color
@@ -346,11 +392,6 @@ public class GameActivity extends AppCompatActivity {
         mInNeedOfReset = false;
         // Force the game to think it's the first click again
         mFirstClick = true;
-
-        // updateTextViews(); // Update the text views for new colors and all
-
-        mLeftText.setText(R.string.press_to_start);
-        mRightText.setText(R.string.press_to_start);
     }
 
     /**

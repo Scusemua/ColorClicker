@@ -26,6 +26,7 @@ public class SettingsMenu extends AppCompatActivity {
     private Button mButtonDeleteContent;         // Reference to the button used to delete scores
     private Button mButtonPickColors;            // Reference to the button used to pick colors
     private Button mHelpButton;                  // Reference to the button that displays help
+    private ToggleButton mToggleButtonVibrate;         // Reference to the toggle vibration button
     private ToggleButton mToggleSoundButton;     // Reference to the toggle sound button
 
     private String mCurrentNickName;             // The user's current nickname
@@ -53,8 +54,9 @@ public class SettingsMenu extends AppCompatActivity {
         mButtonConfirmNickname = (Button) findViewById(R.id.button_confirmNickname);
         mButtonDeleteContent = (Button) findViewById(R.id.button_delete_local_content);
         mButtonPickColors = (Button) findViewById(R.id.button_pickerColors);
-        mToggleSoundButton = (ToggleButton) findViewById(R.id.togglebutton_sound);
         mHelpButton = (Button) findViewById(R.id.button_settingsHelp);
+        mToggleSoundButton = (ToggleButton) findViewById(R.id.togglebutton_sound);
+        mToggleButtonVibrate = (ToggleButton) findViewById(R.id.togglebutton_vibrate);
 
         // Assign the current nickname text view the value of the saved nick name
         mTextViewCurrentNickname.setText("Current nickname: " + mCurrentNickName);
@@ -62,6 +64,20 @@ public class SettingsMenu extends AppCompatActivity {
         // Save the color of the text now, in case the user triggers the warning
         // button which will turn the text white and therefore change the color
         final int oldColor = mWarningText.getCurrentTextColor();
+
+        mToggleButtonVibrate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Save the SharedPreferences parameter for vibration
+                SharedPreferences.Editor editor = mSharedPref.edit();
+                if (isChecked) {
+                    editor.putBoolean("vibrationEnabled", true);
+                } else {
+                    editor.putBoolean("vibrationEnabled", false);
+                }
+                editor.apply();
+            }
+        });
 
         mToggleSoundButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -172,7 +188,11 @@ public class SettingsMenu extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        boolean enabled = mSharedPref.getBoolean("soundEnabled", true);
-        mToggleSoundButton.setChecked(enabled);
+
+        // Determine whether or not the various toggle buttons should be toggled or not
+        boolean soundEnabled = mSharedPref.getBoolean("soundEnabled", true);
+        boolean vibrationEnabled = mSharedPref.getBoolean("vibrationEnabled", true);
+        mToggleSoundButton.setChecked(soundEnabled);
+        mToggleButtonVibrate.setChecked(vibrationEnabled);
     }
 }
