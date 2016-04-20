@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom"
-    tools:context=".GameActivity">
+    tools:context=".StandardGame">
 
     <TextView
         android:id="@+id/textview_titleText"
@@ -40,11 +40,18 @@
         android:textStyle="bold"
         android:textColor="@color/gray"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:orientation="horizontal"
         android:weightSum="2">
+
+        <View
+            android:id="@+id/centerDivider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>
 
         <FrameLayout
             android:id="@+id/framelayout_left"
@@ -56,12 +63,14 @@
             android:background="@drawable/customborder"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:layout_weight="1">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/centerDivider"
+            android:layout_toStartOf="@id/centerDivider">
             <TextView
                 android:id="@+id/textview_left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/left_color"
                 android:gravity="center"
                 style="@style/TextShadow"/>
         </FrameLayout>
@@ -76,15 +85,31 @@
             android:background="@drawable/customborder"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:layout_weight="1">
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@id/centerDivider"
+            android:layout_toEndOf="@id/centerDivider">
             <TextView
                 android:id="@+id/textview_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/right_color"
                 android:gravity="center"
                 style="@style/TextShadow"/>
         </FrameLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/centerTextView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/begin"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            style="@style/TextShadow"
+            android:textSize="36sp"/>
+
+    </RelativeLayout>
 </LinearLayout>

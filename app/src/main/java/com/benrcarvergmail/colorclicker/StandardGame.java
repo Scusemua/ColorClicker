@@ -15,13 +15,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class StandardGame extends AppCompatActivity {
 
     private TextView mTitleText;       // Reference to the title text
     private TextView mLeftText;        // Reference to the left color TextView
     private TextView mRightText;       // Reference to the right color TextView
     private TextView mPointsCounter;   // Reference to the points counter
     private TextView mTimerText;       // Reference to the timer TextView
+    private TextView mCenterTextView;      // Reference to the center TextView
     private MyColor[] mColors;         // Array full of colors
     private MyColor mLeftColor;        // Reference to the color of the left TextView
     private MyColor mRightColor;       // Reference to the color of the right TextView
@@ -49,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mNickname = intent.getStringExtra("nickname");
         mUniqueUserId = intent.getStringExtra("uniqueUserId");
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_gamestandard);
 
         // Create references to the various TextView objects
         mTitleText = (TextView) findViewById(R.id.textview_titleText);
@@ -57,6 +58,7 @@ public class GameActivity extends AppCompatActivity {
         mRightText = (TextView) findViewById(R.id.textview_right);
         mPointsCounter = (TextView) findViewById(R.id.textview_counter);
         mTimerText = (TextView) findViewById(R.id.textview_timer);
+        mCenterTextView = (TextView) findViewById(R.id.centerTextView);
         mLeftFrameLayout = (FrameLayout) findViewById(R.id.framelayout_left);
         mRightFrameLayout = (FrameLayout) findViewById(R.id.framelayout_right);
 
@@ -102,7 +104,8 @@ public class GameActivity extends AppCompatActivity {
                 if(mFirstClick) {
                     Log.i(TAG, "mFirstClick true for left text");
                     mTimer.resetTimer();         // Start the timer
-                    mFirstClick = false;    // It is no longer the first click
+                    mFirstClick = false;         // It is no longer the first click
+                    mCenterTextView.setText("");     // Reset the text for the middle text view
                     // Reset points to zero
                     mPoints = 0;
                     // Update the point counter
@@ -155,7 +158,8 @@ public class GameActivity extends AppCompatActivity {
                 if(mFirstClick) {
                     Log.i(TAG, "mFirstClick true for right text");
                     mTimer.resetTimer();         // Start the timer
-                    mFirstClick = false;    // It is no longer the first click
+                    mFirstClick = false;         // It is no longer the first click
+                    mCenterTextView.setText("");     // Reset the text for the middle text view
                     // Reset points to zero
                     mPoints = 0;
                     // Update the point counter
@@ -316,6 +320,11 @@ public class GameActivity extends AppCompatActivity {
         mTimerText.setText("0ms");
         mInNeedOfReset = true;
 
+        // Update TextViews
+        mCenterTextView.setText(R.string.press_to_restart);
+        mLeftText.setText("");
+        mRightText.setText("");
+
         // Ensure vibration is enabled before vibrating
         if (mVibrationEnabled) {
             mVibrator.vibrate(500);
@@ -377,10 +386,11 @@ public class GameActivity extends AppCompatActivity {
      * Resets everything needed to be reset to its default value
      */
     private void resetGame() {
+
         // Update TextViews
-        mLeftText.setText(R.string.press_to_restart);
+        mCenterTextView.setText(R.string.press_again_to_restart);
+
         mLeftText.setBackgroundResource(0);
-        mRightText.setText(R.string.press_to_restart);
         mRightText.setBackgroundResource(0);
         // Reset the title text's text and text color
         mTitleText.setText(R.string.app_name);

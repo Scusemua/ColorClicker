@@ -91,7 +91,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the game activity by creating an intent to start it
-                Intent myIntent = new Intent(MainMenu.this, GameActivity.class);
+                Intent myIntent = new Intent(MainMenu.this, GamemodeSelector.class);
                 myIntent.putExtra("nickname", mUserNickname);
                 myIntent.putExtra("uniqueUserId", mUniqueUserId);
                 startActivity(myIntent);

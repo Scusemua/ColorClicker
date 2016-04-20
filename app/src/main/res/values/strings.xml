@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Color Clicker</string>
-    <string name="left_color">Click either to begin!</string>
-    <string name="right_color">Click either to begin!</string>
+    <string name="begin">Click a color to begin!</string>
     <string name="default_timer">Timer&#8230;</string>
     <string name="timer_timesup">Times up!</string>
     <string name="welcome_text">Welcome to Color Clicker!</string>
@@ -9,6 +8,7 @@
     <string name="right_pregame">Click either!</string>
     <string name="press_to_start">Press to start!</string>
     <string name="press_to_restart">Press to restart!</string>
+    <string name="press_again_to_restart">Press again to restart!</string>
     <string name="game_lost_generic">You lose!</string>
     <string name="game_lost_because_wrong">Wrong!</string>
     <string name="game_lost_because_time">Time\'s up!</string>
@@ -50,6 +50,11 @@
     <string name="vibrate_on">Vibration On</string>
     <string name="vibrate_off">Vibration Off</string>
     <string name="help_button">\?</string>
+    <string name="textview_gamemodeSelectorTitle">Select the Game Mode</string>
+    <string name="info">Info</string>
+    <string name="gamemodeSprint">Sprint</string>
+    <string name="gamemodeStandard">Standard</string>
+    <string name="gamemodeReverse">Reverse</string>
     <string name="sharedPreferences_nickname">nickname</string>
     <string name="sharedPreferences_firstTime">firstTime</string>
     <string name="sharedPreferences_uniqueId">uniqueId</string>
