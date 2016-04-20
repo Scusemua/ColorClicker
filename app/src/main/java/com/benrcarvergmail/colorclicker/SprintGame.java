@@ -1,16 +1,23 @@
 package com.benrcarvergmail.colorclicker;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
 /**
  * Created by Benjamin on 4/20/2016.
  */
-public class StandardGame extends RootGame {
+public class SprintGame extends RootGame {
+
+    private final static String TAG = "ColorClickerSprint";
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+
+        // Recreate the mTimer object such that it lasts 30 seconds
+        mTimer = new SprintTimerController(30000, 10);
 
         mLeftText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,20 +47,17 @@ public class StandardGame extends RootGame {
 
                 if (!mFirstClick) {
                     if (mLeftIsCorrect) {
-                        // Call updatePoints(true), incrementing the points
-                        updatePoints();
+                        // Update the points. Since they clicked the correct color, pass true.
+                        updatePoints(true);
                         // Update the statistic for the number of whatever color was clicked by
                         // referencing the proper achievement using the color's name
                         Achievements.updateNumericalAchievement("achievementTotal" + mLeftColor.getColorName(), 1, false);
-                        // We need the timer to restart since the user did not lose
-                        mTimer.setNeedReset(true);
                         Log.i(TAG, "LEFT was clicked.");
                         Log.i(TAG, "Value of leftIsCorrect: " + mLeftIsCorrect);
                         updateTextViews();
                     } else {
-                        // The user lost the game so just stop the timer for now
-                        mTimer.cancel();
-                        loseGame(R.string.game_lost_because_wrong);
+                        // Update the points. Since they clicked the incorrect color, pass false.
+                        updatePoints(false);
                         // Update the statistical value for the number of incorrectly clicked colors
                         Achievements.updateNumericalAchievement("achievementTotalClickedBad", 1, false);
                         // Update the statistic for the number of whatever color was clicked by
@@ -61,6 +65,7 @@ public class StandardGame extends RootGame {
                         Achievements.updateNumericalAchievement("achievementTotal" + mLeftColor.getColorName(), 1, false);
                         Log.i(TAG, "LEFT was clicked.");
                         Log.i(TAG, "Value of leftIsCorrect: " + mLeftIsCorrect);
+                        updateTextViews();
                     }
                 }
             }
@@ -94,10 +99,8 @@ public class StandardGame extends RootGame {
 
                 if (!mFirstClick) {
                     if (mLeftIsCorrect) {
-                        // The user lost the game so just stop the timer for now
-                        mTimer.cancel();
-                        // Call updatePoints(false), which will handle the user losing the game
-                        loseGame(R.string.game_lost_because_wrong);
+                        // Update the points. Since they clicked the correct color, pass true.
+                        updatePoints(false);
                         // Update the statistical value for the number of incorrectly clicked colors
                         Achievements.updateNumericalAchievement("achievementTotalClickedBad", 1, false);
                         // Update the statistic for the number of whatever color was clicked by
@@ -105,14 +108,13 @@ public class StandardGame extends RootGame {
                         Achievements.updateNumericalAchievement("achievementTotal" + mRightColor.getColorName(), 1, false);
                         Log.i(TAG, "RIGHT was clicked.");
                         Log.i(TAG, "Value of leftIsCorrect: " + mLeftIsCorrect);
+                        updateTextViews();
                     } else {
                         // Call updatePoints(true), incrementing the points
-                        updatePoints();
+                        updatePoints(true);
                         // Update the statistic for the number of whatever color was clicked by
                         // referencing the proper achievement using the color's name
                         Achievements.updateNumericalAchievement("achievementTotal" + mRightColor.getColorName(), 1, false);
-                        // We need the timer to restart since the user did not lose
-                        mTimer.setNeedReset(true);
                         Log.i(TAG, "RIGHT was clicked.");
                         Log.i(TAG, "Value of leftIsCorrect: " + mLeftIsCorrect);
                         updateTextViews();
@@ -120,5 +122,75 @@ public class StandardGame extends RootGame {
                 }
             }
         });
+    }
+
+    protected void updatePoints(boolean increment) {
+        // If they clicked correctly, increment their points.
+        if (increment) {
+            super.updatePoints();
+        } else {
+            // Ensure the user's points do not go negative.
+            if (mPoints > 0) {
+                mPoints--;                                          // Decrement the player's points
+                mPointsCounter.setText(String.valueOf(mPoints));    // Update the point counter
+            }
+
+            // Ensure sound is enabled before playing sounds
+            if (mSoundEnabled) {
+                // Play the sound for clicking the wrong color
+                mPlayer = MediaPlayer.create(this, R.raw.antiding);
+                mPlayer.start();
+                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    public void onCompletion(MediaPlayer player) {
+                        mPlayer.release();
+                    }
+                });
+            }
+
+            // Ensure vibration is enabled before vibrating
+            if (mVibrationEnabled) {
+                mVibrator.vibrate(500);
+            }
+        }
+    }
+
+    public class SprintTimerController extends TimerController {
+
+        /**
+         * Constructor for the TimerController object
+         *
+         * @param startTime the start time for the timer (what the timer should start at)
+         * @param interval  the interval at which the timer should update (I think)
+         */
+        public SprintTimerController(long startTime, long interval) {
+            super(startTime, interval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            if (mNeedReset) {
+                resetTimer();   // Reset the timer
+            } else {
+                String s = "Time Remaining: " + String.valueOf(millisUntilFinished / 1000) + "." + String.valueOf(millisUntilFinished % 1000);
+                mTimerText.setText(s);
+            }
+        }
+
+        @Override
+        public void onFinish() {
+            // Ensure sound is enabled before playing sounds
+            if (mSoundEnabled) {
+                // Play the sound for clicking the wrong color
+                mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.wrong);
+                mPlayer.start();
+                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    public void onCompletion(MediaPlayer player) {
+                        mPlayer.release();
+                    }
+                });
+            }
+
+            super.onFinish();
+        }
     }
 }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 /**
  * Created by Benjamin on 4/19/2016.
@@ -72,7 +71,7 @@ public class GamemodeSelector extends Activity {
         mButtonGamemodeSprint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(GamemodeSelector.this, StandardGame.class);
+                Intent myIntent = new Intent(GamemodeSelector.this, SprintGame.class);
                 startActivity(myIntent);
             }
         });
@@ -81,7 +80,7 @@ public class GamemodeSelector extends Activity {
         mButtonGamemodeSprintHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(GamemodeSelector.this, StandardGame.class);
+                Intent myIntent = new Intent(GamemodeSelector.this, SprintGame.class);
                 startActivity(myIntent);
             }
         });
