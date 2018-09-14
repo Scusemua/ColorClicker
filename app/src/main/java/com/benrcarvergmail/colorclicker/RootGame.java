@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -38,6 +39,10 @@ public class RootGame extends Activity {
     protected boolean mVibrationEnabled; // Indicates whether or not vibration is enabled
     protected FrameLayout mLeftFrameLayout;    // Reference to the left FrameLayout
     protected FrameLayout mRightFrameLayout;   // Reference to the right FrameLayout
+
+    protected Button mLeftButton;
+    protected Button mRightButton;
+
     protected boolean mFirstClick = true;      // Used to identify whether or not its the first click
 
     // Establish a reference to the system's vibration controller
@@ -55,13 +60,17 @@ public class RootGame extends Activity {
 
         // Create references to the various TextView objects
         mTitleText = (TextView) findViewById(R.id.textview_titleText);
-        mLeftText = (TextView) findViewById(R.id.textview_left);
-        mRightText = (TextView) findViewById(R.id.textview_right);
+        // mLeftText = (TextView) findViewById(R.id.textview_left);
+        // mRightText = (TextView) findViewById(R.id.textview_right);
         mPointsCounter = (TextView) findViewById(R.id.textview_counter);
         mTimerText = (TextView) findViewById(R.id.textview_timer);
         mCenterTextView = (TextView) findViewById(R.id.centerTextView);
-        mLeftFrameLayout = (FrameLayout) findViewById(R.id.framelayout_left);
-        mRightFrameLayout = (FrameLayout) findViewById(R.id.framelayout_right);
+
+        mLeftButton = (Button) findViewById(R.id.leftButton);
+        mRightButton = (Button) findViewById(R.id.rightButton);
+
+        //mLeftFrameLayout = (FrameLayout) findViewById(R.id.framelayout_left);
+        //mRightFrameLayout = (FrameLayout) findViewById(R.id.framelayout_right);
 
         mVibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
 
@@ -75,11 +84,15 @@ public class RootGame extends Activity {
         // Pick a random color for the left TextView and save the color in leftColor
         mLeftColor = pickFirstColor();
         // Set mLeftText's background to be the generated color
-        mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
+        // mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
+        //mLeftButton.setBackgroundResource(mLeftColor.getColorId());
+        mLeftButton.setBackgroundColor(ContextCompat.getColor(this, mLeftColor.getColorId()));
 
         // Pick a random color for the right TextView and save the color in rightColor
         mRightColor = pickFirstColor();
-        mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
+        // mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
+        //mLeftButton.setBackgroundResource(mRightColor.getColorId());
+        mRightButton.setBackgroundColor(ContextCompat.getColor(this, mRightColor.getColorId()));
 
         // Load the SharedPreference data for whether or not sounds and vibrations are enabled
         mSoundEnabled = MainMenu.sSharedPref.getBoolean("soundEnabled", true);
@@ -154,8 +167,12 @@ public class RootGame extends Activity {
         mRightColor = pickRandomColor();
 
         // Update the TextViews' background colors
-        mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
-        mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
+        // mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
+        // mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
+        //mLeftButton.setBackgroundResource(mLeftColor.getColorId());
+        //mRightButton.setBackgroundResource(mRightColor.getColorId());
+        mLeftButton.setBackgroundColor(ContextCompat.getColor(this, mLeftColor.getColorId()));
+        mRightButton.setBackgroundColor(ContextCompat.getColor(this, mRightColor.getColorId()));
 
         Random RNG = new Random();      // Create a new Random Number Generator
         int rand = RNG.nextInt(2) + 1;  // Generate a number, either 1 or 2 (I like 1 and 2)
@@ -167,12 +184,20 @@ public class RootGame extends Activity {
         // If rand is 1, the LEFT TextView will be improperly labeled.
         // If rand is 2, the RIGHT TextView will be improperly labeled.
         if (rand == 1) {
-            mLeftText.setText(tempColor.getColorName());
-            mRightText.setText(mRightColor.getColorName());
+            //mLeftText.setText(tempColor.getColorName());
+            //mRightText.setText(mRightColor.getColorName());
+
+            mLeftButton.setText(tempColor.getColorName());
+            mRightButton.setText(mRightColor.getColorName());
+
             mLeftIsCorrect = false;
         } else {
-            mLeftText.setText(mLeftColor.getColorName());
-            mRightText.setText(tempColor.getColorName());
+            //mLeftText.setText(mLeftColor.getColorName());
+            //mRightText.setText(tempColor.getColorName());
+
+            mLeftButton.setText(mLeftColor.getColorName());
+            mRightButton.setText(tempColor.getColorName());
+
             mLeftIsCorrect = true;
         }
     }
@@ -215,8 +240,10 @@ public class RootGame extends Activity {
 
         // Update TextViews. The center text reads "press to restart" and the left and right read nothing.
         mCenterTextView.setText(R.string.press_to_restart);
-        mLeftText.setText("");
-        mRightText.setText("");
+        mLeftButton.setText("");
+        mRightButton.setText("");
+        //mLeftText.setText("");
+        //mRightText.setText("");
 
         // Ensure sound is enabled before playing sounds
         if (mSoundEnabled) {
@@ -238,9 +265,11 @@ public class RootGame extends Activity {
         // Draw the big red 'X' over the correct textview
         if (mLeftIsCorrect) {
             // mLeftText.setBackgroundResource(R.drawable.border_correct);
-            mRightText.setBackgroundResource(R.drawable.wrong_answer_x2);
+            //mRightText.setBackgroundResource(R.drawable.wrong_answer_x2);
+            //mRightButton.setBackgroundResource(R.drawable.wrong_answer_x2);
         } else {
-            mLeftText.setBackgroundResource(R.drawable.wrong_answer_x2);
+            //mLeftText.setBackgroundResource(R.drawable.wrong_answer_x2);
+            //mLeftButton.setBackgroundResource(R.drawable.wrong_answer_x2);
             // mRightText.setBackgroundResource(R.drawable.border_correct);
         }
 
@@ -295,14 +324,16 @@ public class RootGame extends Activity {
     protected void resetGame() {
         // Have the center text view display "press again to restart"
         mCenterTextView.setText(R.string.press_again_to_restart);
-        mLeftText.setBackgroundResource(0);
-        mRightText.setBackgroundResource(0);
+        mLeftButton.setBackgroundColor(0);
+        mRightButton.setBackgroundColor(0);
+        //mLeftText.setBackgroundResource(0);
+        //mRightText.setBackgroundResource(0);
         // Reset the title text's text and text color
         mTitleText.setText(R.string.app_name);
         // Reset the title text's color
-        mTitleText.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light));
+        // mTitleText.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light));
         // Reset the point counter's text color
-        mPointsCounter.setTextColor(ContextCompat.getColor(this, R.color.gray));
+        // mPointsCounter.setTextColor(ContextCompat.getColor(this, R.color.gray));
         // Set this back to false since we just reset the game
         mInNeedOfReset = false;
         // Force the game to think it's the first click again

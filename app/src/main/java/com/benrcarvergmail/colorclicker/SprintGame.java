@@ -19,7 +19,7 @@ public class SprintGame extends RootGame {
         // Recreate the mTimer object such that it lasts 30 seconds
         mTimer = new SprintTimerController(30000, 10);
 
-        mLeftText.setOnClickListener(new View.OnClickListener() {
+        mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -71,7 +71,7 @@ public class SprintGame extends RootGame {
             }
         });
 
-        mRightText.setOnClickListener(new View.OnClickListener() {
+        mRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

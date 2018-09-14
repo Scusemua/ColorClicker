@@ -12,7 +12,7 @@ public class StandardGame extends RootGame {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
 
-        mLeftText.setOnClickListener(new View.OnClickListener() {
+        mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -66,7 +66,7 @@ public class StandardGame extends RootGame {
             }
         });
 
-        mRightText.setOnClickListener(new View.OnClickListener() {
+        mRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

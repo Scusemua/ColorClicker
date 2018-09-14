@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="button_border_thickness">3dp</dimen>
     <dimen name="button_border_corner_radius">16dp</dimen>
+    <dimen name="game_button_border_thickness">4dp</dimen>
+    <dimen name="game_button_border_corner_radius">24dp</dimen>
 </resources>
