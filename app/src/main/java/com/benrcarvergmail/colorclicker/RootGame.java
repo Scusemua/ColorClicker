@@ -86,7 +86,7 @@ public class RootGame extends Activity {
         mVibrationEnabled = MainMenu.sSharedPref.getBoolean("vibrationEnabled", true);
 
         // Start time for the timer in milliseconds
-        final long startTime = 1150;
+        final long startTime = 1500;
         // Update interval for the timer
         final long interval = 5;
         // Create the TimerController object to handle the timer
@@ -248,35 +248,35 @@ public class RootGame extends Activity {
         int score = Integer.parseInt(mPointsCounter.getText().toString());
 
         // Create a local reference to the list of local high scores for convenience's sake
-        ArrayList<Highscore> localListOfHighscores = MainMenu.sLocalHighScores;
+        ArrayList<HighScore> localListOfHighScores = MainMenu.sLocalHighScores;
 
         // Update the LOCAL high scores arraylist
-        for(int i = 0; i < localListOfHighscores.size(); i++) {
-            Log.i(TAG, "Outer loop " + i + " out of " + localListOfHighscores.size());
+        for(int i = 0; i < localListOfHighScores.size(); i++) {
+            Log.i(TAG, "Outer loop " + i + " out of " + localListOfHighScores.size());
             // Iterate through and see if the score the user JUST got it bigger than any score
-            if (localListOfHighscores.get(i).getScore() < score) {
+            if (localListOfHighScores.get(i).getScore() < score) {
                 // Save the old high score in case we need to bump scores down
-                int oldHighScore = localListOfHighscores.get(i).getScore();
+                int oldHighScore = localListOfHighScores.get(i).getScore();
                 // Save the old nick name in case we need to bump scores down
-                String oldNickName = localListOfHighscores.get(i).getNickname();
+                String oldNickName = localListOfHighScores.get(i).getNickname();
                 // Create a new high score using the proper data
-                Highscore newHighScore = new Highscore(score, mNickname, mUniqueUserId);
+                HighScore newHighScore = new HighScore(score, mNickname, mUniqueUserId);
                 // Replace the old high score with the new high score
-                localListOfHighscores.set(i, newHighScore);
+                localListOfHighScores.set(i, newHighScore);
                 // Now, let's see if we need to bump the scores down. We do this by iterating
                 // through the remaining scores and determining which need to be shifted down based
                 // on whether or not they're smaller than the score that comes before it.
-                for (int j = i; j < localListOfHighscores.size(); j++) {
-                    Log.i(TAG, "Inner loop " + j + " out of " + localListOfHighscores.size());
+                for (int j = i; j < localListOfHighScores.size(); j++) {
+                    Log.i(TAG, "Inner loop " + j + " out of " + localListOfHighScores.size());
                     // If we find a score that needs to be shifted...
-                    if (oldHighScore > localListOfHighscores.get(j).getScore()) {
+                    if (oldHighScore > localListOfHighScores.get(j).getScore()) {
                         // We first create another high score to replace the score needing to be
                         // shifted. Basically, if we have scores 1, 2, 3, we replace score 1 with
                         // new score, then score 2 with score 1, then score 3 with score 2.
-                        newHighScore = new Highscore(oldHighScore, oldNickName, mUniqueUserId);
-                        oldHighScore = localListOfHighscores.get(j).getScore();
-                        oldNickName = localListOfHighscores.get(j).getNickname();
-                        localListOfHighscores.set(j, newHighScore);
+                        newHighScore = new HighScore(oldHighScore, oldNickName, mUniqueUserId);
+                        oldHighScore = localListOfHighScores.get(j).getScore();
+                        oldNickName = localListOfHighScores.get(j).getNickname();
+                        localListOfHighScores.set(j, newHighScore);
                     }
                 }
                 // Save the high scores now that they've been modified

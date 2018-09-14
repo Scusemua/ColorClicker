@@ -50,7 +50,7 @@
     <string name="vibrate_on">Vibration On</string>
     <string name="vibrate_off">Vibration Off</string>
     <string name="help_button">\?</string>
-    <string name="textview_gamemodeSelectorTitle">Select the Game Mode</string>
+    <string name="textview_gamemodeSelectorTitle">Select Game Mode</string>
     <string name="info">Info</string>
     <string name="gamemodeSprint">Sprint</string>
     <string name="gamemodeStandard">Standard</string>

@@ -174,7 +174,7 @@ public class SettingsMenu extends AppCompatActivity {
      */
     private void resetLocalScores() {
         // Create a default high score to use
-        Highscore defaultScore = new Highscore(0, mCurrentNickName, mUniqueUserId);
+        HighScore defaultScore = new HighScore(0, mCurrentNickName, mUniqueUserId);
         // Clear the local high score ArrayList
         MainMenu.sLocalHighScores.clear();
         // Add the default high score for each value

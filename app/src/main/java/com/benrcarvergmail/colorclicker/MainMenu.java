@@ -38,9 +38,9 @@ public class MainMenu extends AppCompatActivity {
     public static SharedPreferences sSharedPref;
 
     // Array of the local high scores
-    public static ArrayList<Highscore> sLocalHighScores = new ArrayList<>();
+    public static ArrayList<HighScore> sLocalHighScores = new ArrayList<>();
     // Array of the global high scores
-    public static ArrayList<Highscore> sGlobalHighScores = new ArrayList<>();
+    public static ArrayList<HighScore> sGlobalHighScores = new ArrayList<>();
 
     private final String TAG = "ColorClickerMainMenu";  // TAG String
 
@@ -157,7 +157,7 @@ public class MainMenu extends AppCompatActivity {
         editor.putBoolean(getString(R.string.sharedPreferences_firstTime), false);
         editor.putBoolean("soundEnabled", true);                // Enable sound
         // Create a default high score object to create the high scores
-        Highscore defaultScore = new Highscore(0, mUserNickname, mUniqueUserId);
+        HighScore defaultScore = new HighScore(0, mUserNickname, mUniqueUserId);
         if (sLocalHighScores == null) { // Instantiate the high scores list
             sLocalHighScores = new ArrayList<>();
         }
@@ -210,7 +210,7 @@ public class MainMenu extends AppCompatActivity {
     public void retrieveLocalScores() {
         Gson gson = new Gson();
         String json = sSharedPref.getString("sLocalHighScores", "");
-        Type type = new TypeToken<List<Highscore>>(){}.getType();
+        Type type = new TypeToken<List<HighScore>>(){}.getType();
         sLocalHighScores = gson.fromJson(json, type);
     }
 
@@ -220,7 +220,7 @@ public class MainMenu extends AppCompatActivity {
     public static void saveLocalHighScores() {
         SharedPreferences.Editor editor = sSharedPref.edit();
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Highscore>>(){}.getType();
+        Type type = new TypeToken<List<HighScore>>(){}.getType();
         String json = gson.toJson(sLocalHighScores, type);
         editor.putString("sLocalHighScores", json);
         editor.apply();

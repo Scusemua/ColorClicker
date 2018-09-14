@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="false" android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!--apply button background transparent, full opacity-->
+            <solid android:color="#00ffffff"/>
+            <!--make button border solid color, nontransparent-->
+            <stroke android:color="#808080" android:width="@dimen/button_border_thickness"/>
+            <corners android:radius="@dimen/button_border_corner_radius"/>
+        </shape>
+    </item>
+    <item android:state_focused="true" android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!--apply button background transparent, full opacity-->
+            <solid android:color="#00ffffff"/>
+            <!--make button border solid color, nontransparent-->
+            <stroke android:color="#808080" android:width="@dimen/button_border_thickness"/>
+            <corners android:radius="@dimen/button_border_corner_radius"/>
+        </shape>
+    </item>
+    <item android:state_focused="true" android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!--apply button background transparent, full opacity-->
+            <solid android:color="#00ffffff"/>
+            <!--make button border solid color, nontransparent-->
+            <stroke android:color="#ffffff" android:width="@dimen/button_border_thickness"/>
+            <corners android:radius="@dimen/button_border_corner_radius"/>
+        </shape>
+    </item>
+    <item android:state_focused="false" android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!--apply button background transparent, full opacity-->
+            <solid android:color="#00ffffff"/>
+            <!--make button border solid color, nontransparent-->
+            <stroke android:color="#ffffff" android:width="@dimen/button_border_thickness"/>
+            <corners android:radius="@dimen/button_border_corner_radius"/>
+        </shape>
+    </item>
+</selector>

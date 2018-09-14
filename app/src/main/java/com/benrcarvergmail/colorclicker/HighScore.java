@@ -3,7 +3,7 @@ package com.benrcarvergmail.colorclicker;
 /**
  * Created by Benjamin on 4/12/2016.
  */
-public class Highscore {
+public class HighScore {
     private int mScore;
     private String mNickname;
     private String mUniqueUserId;
@@ -14,7 +14,7 @@ public class Highscore {
      * @param n the user's mNickname
      * @param u the user's unique user id
      */
-    public Highscore(int s, String n, String u) {
+    public HighScore(int s, String n, String u) {
         mScore = s;
         mNickname = n;
         mUniqueUserId = u;
@@ -45,12 +45,12 @@ public class Highscore {
     }
 
     /**
-     * Method to compare two Highscore objects
-     * @param comp the Highscore we are comparing
+     * Method to compare two HighScore objects
+     * @param comp the HighScore we are comparing
      * @return 1 if this high mScore is greater than the argument, 0 if this high mScore is equal to
      * the argument, or -1 if this high mScore is less than the argument.
      */
-    public int compareTo(Highscore comp) {
+    public int compareTo(HighScore comp) {
         if (this.mScore > comp.mScore) {
             return 1;
         } else if (this.mScore < comp.mScore) {
@@ -71,11 +71,11 @@ public class Highscore {
             return false;
         }
 
-        if (!Highscore.class.isAssignableFrom(obj.getClass())) {
+        if (!HighScore.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
 
-        final Highscore other = (Highscore) obj;
+        final HighScore other = (HighScore) obj;
         if ((this.mNickname == null) ? (other.mNickname != null) : !this.mNickname.equals(other.mNickname)) {
             return false;
         }

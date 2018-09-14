@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundStandard">
+    android:background="@color/colorBackgroundMain">
 
     <TextView
         android:id="@+id/textview_gamemodeSelectorTitle"
@@ -33,15 +33,14 @@
 
         <Button
             android:id="@+id/button_gamemodeStandard"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            style="@style/GeneralButtonStyle"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
             android:text="@string/gamemodeStandard" />
 
         <Button
             android:id="@+id/button_gamemodeStandardInfo"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
-            android:text="@string/info"/>
+            style="@style/InfoButtonStyle" />
 
     </LinearLayout>
 
@@ -53,15 +52,14 @@
 
         <Button
             android:id="@+id/button_gamemodeSprint"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            style="@style/GeneralButtonStyle"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
             android:text="@string/gamemodeSprint" />
 
         <Button
             android:id="@+id/button_gamemodeSprintInfo"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
-            android:text="@string/info"/>
+            style="@style/InfoButtonStyle" />
 
 
     </LinearLayout>
@@ -74,15 +72,14 @@
 
         <Button
             android:id="@+id/button_gamemodeReverse"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            style="@style/GeneralButtonStyle"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
             android:text="@string/gamemodeReverse" />
 
         <Button
             android:id="@+id/button_gamemodeReverseInfo"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
-            android:text="@string/info" />
+            style="@style/InfoButtonStyle" />
 
     </LinearLayout>
 
