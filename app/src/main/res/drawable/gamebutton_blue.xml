@@ -14,7 +14,7 @@
             <corners android:radius="14dp" />
             <solid android:color="#90caf9" />
             <padding android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="0dp" />
-            <stroke android:width="5dp" android:color="#d32f2f"/>
+            <stroke android:width="5dp" android:color="@color/incorrect"/>
         </shape>
     </item>
 </selector>

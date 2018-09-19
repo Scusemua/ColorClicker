@@ -37,7 +37,7 @@
                 />
             <stroke
                 android:width="5dp"
-                android:color="#d32f2f"
+                android:color="@color/incorrect"
                 />
         </shape>
     </item>
