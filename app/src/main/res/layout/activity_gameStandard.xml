@@ -60,9 +60,9 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.benrcarvergmail.colorclicker.GameButton
                 android:id="@+id/leftButton"
-                android:background="@drawable/gameplay_button_border"
+                android:background="@drawable/gamebutton_red"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_weight="0.5"
@@ -75,9 +75,9 @@
                 android:textSize="24sp"
                 android:text="Left Button"/>
 
-            <Button
+            <com.benrcarvergmail.colorclicker.GameButton
                 android:id="@+id/rightButton"
-                android:background="@drawable/gameplay_button_border"
+                android:background="@drawable/gamebutton_blue"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_weight="0.5"
@@ -91,50 +91,6 @@
                 android:text="Right Button"/>
 
         </LinearLayout>
-
-        <!--<FrameLayout
-            android:id="@+id/framelayout_left"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/customborder"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@id/centerDivider"
-            android:layout_toStartOf="@id/centerDivider">
-            <TextView
-                android:id="@+id/textview_left"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                style="@style/TextShadow"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/framelayout_right"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/customborder"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@id/centerDivider"
-            android:layout_toEndOf="@id/centerDivider">
-            <TextView
-                android:id="@+id/textview_right"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                style="@style/TextShadow"/>
-        </FrameLayout> -->
 
         <TextView
             android:id="@+id/centerTextView"

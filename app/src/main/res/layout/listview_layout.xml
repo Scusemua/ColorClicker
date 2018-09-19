@@ -7,7 +7,7 @@
     android:textStyle="bold"
     android:gravity="center_horizontal"
     android:textColor="@android:color/white"
-    android:background="@color/colorBackgroundList"
+    android:background="@color/colorBackgroundMain"
     android:padding="10dp"
     style="@style/TextShadow">
 </TextView>

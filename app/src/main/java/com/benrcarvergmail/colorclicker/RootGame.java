@@ -40,8 +40,8 @@ public class RootGame extends Activity {
     protected FrameLayout mLeftFrameLayout;    // Reference to the left FrameLayout
     protected FrameLayout mRightFrameLayout;   // Reference to the right FrameLayout
 
-    protected Button mLeftButton;
-    protected Button mRightButton;
+    protected GameButton mLeftButton;
+    protected GameButton mRightButton;
 
     protected boolean mFirstClick = true;      // Used to identify whether or not its the first click
 
@@ -66,11 +66,8 @@ public class RootGame extends Activity {
         mTimerText = (TextView) findViewById(R.id.textview_timer);
         mCenterTextView = (TextView) findViewById(R.id.centerTextView);
 
-        mLeftButton = (Button) findViewById(R.id.leftButton);
-        mRightButton = (Button) findViewById(R.id.rightButton);
-
-        //mLeftFrameLayout = (FrameLayout) findViewById(R.id.framelayout_left);
-        //mRightFrameLayout = (FrameLayout) findViewById(R.id.framelayout_right);
+        mLeftButton = (GameButton) findViewById(R.id.leftButton);
+        mRightButton = (GameButton) findViewById(R.id.rightButton);
 
         mVibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
 
@@ -84,15 +81,11 @@ public class RootGame extends Activity {
         // Pick a random color for the left TextView and save the color in leftColor
         mLeftColor = pickFirstColor();
         // Set mLeftText's background to be the generated color
-        // mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
-        //mLeftButton.setBackgroundResource(mLeftColor.getColorId());
-        mLeftButton.setBackgroundColor(ContextCompat.getColor(this, mLeftColor.getColorId()));
+        mLeftButton.setBackgroundResource(mLeftColor.getDrawableId());
 
         // Pick a random color for the right TextView and save the color in rightColor
         mRightColor = pickFirstColor();
-        // mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
-        //mLeftButton.setBackgroundResource(mRightColor.getColorId());
-        mRightButton.setBackgroundColor(ContextCompat.getColor(this, mRightColor.getColorId()));
+        mRightButton.setBackgroundResource(mRightColor.getDrawableId());
 
         // Load the SharedPreference data for whether or not sounds and vibrations are enabled
         mSoundEnabled = MainMenu.sSharedPref.getBoolean("soundEnabled", true);
@@ -167,12 +160,8 @@ public class RootGame extends Activity {
         mRightColor = pickRandomColor();
 
         // Update the TextViews' background colors
-        // mLeftFrameLayout.setBackgroundResource(mLeftColor.getColorId());
-        // mRightFrameLayout.setBackgroundResource(mRightColor.getColorId());
-        //mLeftButton.setBackgroundResource(mLeftColor.getColorId());
-        //mRightButton.setBackgroundResource(mRightColor.getColorId());
-        mLeftButton.setBackgroundColor(ContextCompat.getColor(this, mLeftColor.getColorId()));
-        mRightButton.setBackgroundColor(ContextCompat.getColor(this, mRightColor.getColorId()));
+        mLeftButton.setBackgroundResource(mLeftColor.getDrawableId());
+        mRightButton.setBackgroundResource(mRightColor.getDrawableId());
 
         Random RNG = new Random();      // Create a new Random Number Generator
         int rand = RNG.nextInt(2) + 1;  // Generate a number, either 1 or 2 (I like 1 and 2)
@@ -184,17 +173,11 @@ public class RootGame extends Activity {
         // If rand is 1, the LEFT TextView will be improperly labeled.
         // If rand is 2, the RIGHT TextView will be improperly labeled.
         if (rand == 1) {
-            //mLeftText.setText(tempColor.getColorName());
-            //mRightText.setText(mRightColor.getColorName());
-
             mLeftButton.setText(tempColor.getColorName());
             mRightButton.setText(mRightColor.getColorName());
 
             mLeftIsCorrect = false;
         } else {
-            //mLeftText.setText(mLeftColor.getColorName());
-            //mRightText.setText(tempColor.getColorName());
-
             mLeftButton.setText(mLeftColor.getColorName());
             mRightButton.setText(tempColor.getColorName());
 
@@ -239,11 +222,7 @@ public class RootGame extends Activity {
         mInNeedOfReset = true;
 
         // Update TextViews. The center text reads "press to restart" and the left and right read nothing.
-        mCenterTextView.setText(R.string.press_to_restart);
-        mLeftButton.setText("");
-        mRightButton.setText("");
-        //mLeftText.setText("");
-        //mRightText.setText("");
+        // mCenterTextView.setText(R.string.press_to_restart);
 
         // Ensure sound is enabled before playing sounds
         if (mSoundEnabled) {
@@ -262,15 +241,11 @@ public class RootGame extends Activity {
             mVibrator.vibrate(500);
         }
 
-        // Draw the big red 'X' over the correct textview
+        // Reflect the incorrect click visually.
         if (mLeftIsCorrect) {
-            // mLeftText.setBackgroundResource(R.drawable.border_correct);
-            //mRightText.setBackgroundResource(R.drawable.wrong_answer_x2);
-            //mRightButton.setBackgroundResource(R.drawable.wrong_answer_x2);
+            mRightButton.setIncorrect(true);
         } else {
-            //mLeftText.setBackgroundResource(R.drawable.wrong_answer_x2);
-            //mLeftButton.setBackgroundResource(R.drawable.wrong_answer_x2);
-            // mRightText.setBackgroundResource(R.drawable.border_correct);
+            mLeftButton.setIncorrect(true);
         }
 
         // Grab the value of the player's current score and store it in an int variable
@@ -324,34 +299,30 @@ public class RootGame extends Activity {
     protected void resetGame() {
         // Have the center text view display "press again to restart"
         mCenterTextView.setText(R.string.press_again_to_restart);
-        mLeftButton.setBackgroundColor(0);
-        mRightButton.setBackgroundColor(0);
-        //mLeftText.setBackgroundResource(0);
-        //mRightText.setBackgroundResource(0);
         // Reset the title text's text and text color
         mTitleText.setText(R.string.app_name);
-        // Reset the title text's color
-        // mTitleText.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light));
-        // Reset the point counter's text color
-        // mPointsCounter.setTextColor(ContextCompat.getColor(this, R.color.gray));
         // Set this back to false since we just reset the game
         mInNeedOfReset = false;
         // Force the game to think it's the first click again
         mFirstClick = true;
+
+        mLeftButton.setIncorrect(false);
+        mRightButton.setIncorrect(false);
+
     }
 
     /**
      * Populate the color array
      */
     protected void fillColors() {
-        final MyColor red = new MyColor("Red", R.color.red);
-        final MyColor blue = new MyColor("Blue", R.color.blue);
-        final MyColor yellow = new MyColor("Yellow", R.color.yellow);
-        final MyColor orange = new MyColor("Orange", R.color.orange);
-        final MyColor pink = new MyColor("Pink", R.color.pink);
-        final MyColor green = new MyColor("Green", R.color.green);
-        final MyColor purple = new MyColor("Purple", R.color.purple);
-        final MyColor white = new MyColor("White", R.color.white);
+        final MyColor red = new MyColor("Red", R.color.red, R.drawable.gamebutton_red);
+        final MyColor blue = new MyColor("Blue", R.color.blue, R.drawable.gamebutton_blue);
+        final MyColor yellow = new MyColor("Yellow", R.color.yellow, R.drawable.gamebutton_yellow);
+        final MyColor orange = new MyColor("Orange", R.color.orange, R.drawable.gamebutton_orange);
+        final MyColor pink = new MyColor("Pink", R.color.pink, R.drawable.gamebutton_pink);
+        final MyColor green = new MyColor("Green", R.color.green, R.drawable.gamebutton_green);
+        final MyColor purple = new MyColor("Purple", R.color.purple, R.drawable.gamebutton_purple);
+        final MyColor white = new MyColor("White", R.color.white, R.drawable.gamebutton_white);
 
         mColors = new MyColor[] {
                 red,
@@ -405,13 +376,17 @@ public class RootGame extends Activity {
 
     public static class MyColor {
         private String colorName;
+        private int drawableId;
         private int colorId;
 
         // Constructor
-        MyColor(String name, int color) {
+        MyColor(String name, int color, int drawableId) {
             colorName = name;
             colorId = color;
+            this.drawableId = drawableId;
         }
+
+        int getDrawableId() { return drawableId; }
 
         // Return the name of the color
         String getColorName() {

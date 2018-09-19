@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundStandard">
+    android:background="@color/colorBackgroundMain">
 
     <TextView
         android:id="@+id/textview_titleTextMainMenu"
@@ -30,7 +30,7 @@
         android:layout_height="101dp"
         android:layout_gravity="center_horizontal"
         android:elevation="5dp"
-        android:background="#e4e4e4">
+        android:background="#ffffff">
 
         <TextView
             android:id="@+id/colorlabel_cyan"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="game_button">
+        <!-- This state is used when the button was pressed incorrectly. -->
+        <attr name="state_incorrect" format="boolean" />
+        <!-- <attr name="state_blue" format="boolean" />
+        <attr name="state_red" format="boolean" />
+        <attr name="state_orange" format="boolean" />
+        <attr name="state_yellow" format="boolean" />
+        <attr name="state_green" format="boolean" />
+        <attr name="state_purple" format="boolean" />
+        <attr name="state_pink" format="boolean" />
+        <attr name="state_white" format="boolean" /> -->
+    </declare-styleable>
+</resources>
