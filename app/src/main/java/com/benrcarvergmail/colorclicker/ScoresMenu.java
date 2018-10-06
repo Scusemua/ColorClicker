@@ -66,8 +66,10 @@ public class ScoresMenu extends AppCompatActivity {
             mHighScoresGlobal.add(MainMenu.sLocalHighScores.get(i).getNickname() + "                                       " + MainMenu.sGlobalHighScores.get(i).getScore());
         }
 
+
         // Instantiate the adapters
-        mLocalAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_layout, mHighScoresLocal);
+        mLocalAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_layout,
+                R.id.label, mHighScoresLocal);
         // mGlobalAdapter = new ArrayAdapter<Integer>(getApplicationContext(), R.layout.listview_layout, mHighScoresGlobal);
 
         mListViewLocal.setAdapter(mLocalAdapter);

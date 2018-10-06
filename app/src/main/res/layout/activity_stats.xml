@@ -100,8 +100,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="#eaeaea">
+                    android:layout_gravity="center_horizontal">
 
                     <GridLayout
                         android:layout_width="wrap_content"
@@ -116,42 +115,50 @@
                         <TextView
                             android:id="@+id/textview_totalBlue"
                             android:background="@color/blue"
-                            style="@style/AchievementColorClicked"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalRed"
                             android:background="@color/red"
-                            style="@style/AchievementColorClicked"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalYellow"
                             android:background="@color/yellow"
-                            style="@style/AchievementColorClickedHardToSee"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalOrange"
                             android:background="@color/orange"
-                            style="@style/AchievementColorClicked"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalGreen"
                             android:background="@color/green"
-                            style="@style/AchievementColorClicked"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalPurple"
                             android:background="@color/purple"
-                            style="@style/AchievementColorClicked"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalPink"
                             android:background="@color/pink"
-                            style="@style/AchievementColorClicked"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                         <TextView
                             android:id="@+id/textview_totalWhite"
                             android:background="@color/white"
-                            style="@style/AchievementColorClickedHardToSee"/>
+                            style="@style/AchievementColorClickedHardToSee"
+                            android:layout_margin="@dimen/stat_grid_margin"/>
 
                     </GridLayout>
 

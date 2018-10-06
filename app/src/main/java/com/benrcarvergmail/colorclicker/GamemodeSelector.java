@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
 /**
  * Created by Benjamin on 4/19/2016.
@@ -22,6 +26,11 @@ public class GamemodeSelector extends Activity {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_gamemodeselector);
+
+        // Change the parameters for the background image. This makes it scroll more slowly.
+        KenBurnsView backgroundKBV = (KenBurnsView)findViewById(R.id.background_kenburnsview);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(15000, new AccelerateDecelerateInterpolator());
+        backgroundKBV.setTransitionGenerator(generator);
 
         // References to necessary views
         mButtonGamemodeStandard = (Button) findViewById(R.id.button_gamemodeStandard);

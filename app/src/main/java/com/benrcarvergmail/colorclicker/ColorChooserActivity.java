@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
 /**
  * Created by Benjamin on 4/12/2016.
@@ -30,6 +34,11 @@ public class ColorChooserActivity extends AppCompatActivity {
         // Instantiate necessary references to views
         mCheckBoxRed = (CheckBox) findViewById(R.id.colorcheckbox_cyan);
         mCyanColorView = findViewById(R.id.view_colorCyan);
+
+        // Change the parameters for the background image. This makes it scroll more slowly.
+        KenBurnsView backgroundKBV = (KenBurnsView)findViewById(R.id.background_kenburnsview);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(20000, new AccelerateDecelerateInterpolator());
+        backgroundKBV.setTransitionGenerator(generator);
 
         // Save the width for the expanded width
         mExpandedWidth = mCyanColorView.getLayoutParams().width;

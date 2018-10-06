@@ -1,110 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom"
-    android:background="@color/colorBackgroundMain"
     tools:context=".RootGame">
 
-    <TextView
-        android:id="@+id/textview_titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"
-        android:paddingBottom="15dp"
-        android:textSize="48sp"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textview_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="15dp"
-        android:text="@string/default_timer"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_red_light"/>
-
-    <TextView
-        android:id="@+id/textview_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="15dp"
-        android:text="0"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="#dddddd"/>
-
-    <RelativeLayout
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/background_kenburnsview"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_height="match_parent"
+        android:src="@drawable/abstract_bg4_v2"/>
 
-        <View
-            android:id="@+id/centerDivider"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_centerInParent="true"
-            android:visibility="invisible"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.benrcarvergmail.colorclicker.GameButton
-                android:id="@+id/leftButton"
-                android:background="@drawable/gamebutton_red"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:textSize="24sp"
-                android:text="Left Button"/>
-
-            <com.benrcarvergmail.colorclicker.GameButton
-                android:id="@+id/rightButton"
-                android:background="@drawable/gamebutton_blue"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="0.5"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"
-                android:textSize="24sp"
-                android:text="Right Button"/>
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
 
         <TextView
-            android:id="@+id/centerTextView"
-            android:layout_height="wrap_content"
+            android:id="@+id/textview_titleText"
             android:layout_width="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/begin"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            style="@style/TextShadow"
-            android:textSize="36sp"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textSize="48sp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
-    </RelativeLayout>
-</LinearLayout>
+        <TextView
+            android:id="@+id/textview_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="15dp"
+            android:text="@string/default_timer"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"/>
+
+        <TextView
+            android:id="@+id/textview_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="15dp"
+            android:text="0"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#dddddd"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <View
+                android:id="@+id/centerDivider"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:visibility="invisible"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.benrcarvergmail.colorclicker.GameButton
+                    android:id="@+id/leftButton"
+                    android:background="@drawable/gamebutton_red"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="24sp"
+                    android:text="Left Button"/>
+
+                <com.benrcarvergmail.colorclicker.GameButton
+                    android:id="@+id/rightButton"
+                    android:background="@drawable/gamebutton_blue"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="24sp"
+                    android:text="Right Button"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/centerTextView"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/begin"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                style="@style/TextShadow"
+                android:textSize="36sp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

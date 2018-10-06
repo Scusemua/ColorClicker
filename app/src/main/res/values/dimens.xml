@@ -6,4 +6,6 @@
     <dimen name="button_border_corner_radius">16dp</dimen>
     <dimen name="game_button_border_thickness">4dp</dimen>
     <dimen name="game_button_border_corner_radius">24dp</dimen>
+    <dimen name="stat_grid_margin">5dp</dimen>
+    <dimen name="gamemode_selection_button_container_margin">10dp</dimen>
 </resources>

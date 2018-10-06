@@ -8,9 +8,13 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -74,6 +78,11 @@ public class RootGame extends Activity {
         // Assign the points counter's text to the points variable
         mPoints = 0;
         mPointsCounter.setText(String.valueOf(mPoints));
+
+        // Change the parameters for the background image. This makes it scroll more slowly.
+        KenBurnsView backgroundKBV = (KenBurnsView)findViewById(R.id.background_kenburnsview);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(20000, new AccelerateDecelerateInterpolator());
+        backgroundKBV.setTransitionGenerator(generator);
 
         // Populate the color array
         fillColors();

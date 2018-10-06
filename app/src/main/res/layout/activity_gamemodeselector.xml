@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearlayout_rootLayout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackgroundMain">
+    android:layout_height="match_parent">
+
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/background_kenburnsview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/abstract_bg4_v2"/>
 
     <TextView
         android:id="@+id/textview_gamemodeSelectorTitle"
@@ -19,68 +23,79 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="15dp"/>
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="?android:attr/listDivider" />
 
-        <Button
-            android:id="@+id/button_gamemodeStandard"
-            style="@style/GeneralButtonStyle"
-            android:layout_width="125dp"
-            android:layout_height="60dp"
-            android:text="@string/gamemodeStandard" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/gamemode_selection_button_container_margin"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_gamemodeStandardInfo"
-            style="@style/InfoButtonStyle" />
+            <Button
+                android:id="@+id/button_gamemodeStandard"
+                style="@style/GeneralButtonStyle"
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:text="@string/gamemodeStandard" />
+
+            <Button
+                android:id="@+id/button_gamemodeStandardInfo"
+                style="@style/InfoButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/gamemode_selection_button_container_margin"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_gamemodeSprint"
+                style="@style/GeneralButtonStyle"
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:text="@string/gamemodeSprint" />
+
+            <Button
+                android:id="@+id/button_gamemodeSprintInfo"
+                style="@style/InfoButtonStyle" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/gamemode_selection_button_container_margin"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_gamemodeReverse"
+                style="@style/GeneralButtonStyle"
+                android:layout_width="125dp"
+                android:layout_height="60dp"
+                android:text="@string/gamemodeReverse" />
+
+            <Button
+                android:id="@+id/button_gamemodeReverseInfo"
+                style="@style/InfoButtonStyle" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_gamemodeSprint"
-            style="@style/GeneralButtonStyle"
-            android:layout_width="125dp"
-            android:layout_height="60dp"
-            android:text="@string/gamemodeSprint" />
-
-        <Button
-            android:id="@+id/button_gamemodeSprintInfo"
-            style="@style/InfoButtonStyle" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_gamemodeReverse"
-            style="@style/GeneralButtonStyle"
-            android:layout_width="125dp"
-            android:layout_height="60dp"
-            android:text="@string/gamemodeReverse" />
-
-        <Button
-            android:id="@+id/button_gamemodeReverseInfo"
-            style="@style/InfoButtonStyle" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>
