@@ -5,18 +5,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -64,6 +69,11 @@ public class MainMenu extends AppCompatActivity {
 
         // Load in the user's saved nickname
         mUserNickname = sSharedPref.getString(getString(R.string.sharedPreferences_nickname), "I NEED TO SET A NICKNAME");
+
+        // Change the parameters for the background image. This makes it scroll more slowly.
+        KenBurnsView backgroundKBV = (KenBurnsView)findViewById(R.id.background_kenburnsview);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(20000, new AccelerateDecelerateInterpolator());
+        backgroundKBV.setTransitionGenerator(generator);
 
         // Load in the saved local high scores
         retrieveLocalScores();

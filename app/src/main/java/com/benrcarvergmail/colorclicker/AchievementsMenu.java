@@ -3,7 +3,11 @@ package com.benrcarvergmail.colorclicker;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
 /**
  * Created by Benjamin on 4/14/2016.
@@ -48,6 +52,11 @@ public class AchievementsMenu extends Activity {
         mTextViewNickname = (TextView) findViewById(R.id.textview_nicknameAchievement);
         mTextViewCurrentPoints = (TextView) findViewById(R.id.textview_currentPointsAchievement);
         mTextViewNewColorsBought = (TextView) findViewById(R.id.textview_totalColorsBought);
+
+        // Change the parameters for the background image. This makes it scroll more slowly.
+        KenBurnsView backgroundKBV = (KenBurnsView)findViewById(R.id.background_kenburnsview);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(20000, new AccelerateDecelerateInterpolator());
+        backgroundKBV.setTransitionGenerator(generator);
 
         // Display all the values in the TextViews
         loadAchievementValuesIntoTextViews();

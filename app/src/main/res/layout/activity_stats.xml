@@ -1,204 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackgroundMain">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textview_statsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/button_stats"
-        android:textStyle="bold"
-        android:textSize="36sp"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"/>
-
-    <View
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/background_kenburnsview"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="match_parent"
+        android:src="@drawable/abstract_bg4_v2"/>
 
-    <ScrollView
-        android:id="@+id/scrollView_achievement"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearlayout_achievementScrollviewContainer"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textview_statsTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:elevation="4dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:background="#dcdcdc">
+            android:text="@string/button_stats"
+            android:textStyle="bold"
+            android:textSize="36sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"/>
 
-            <TextView
-            android:text="@string/textview_statGeneralStats"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="0dp"
-            style="@style/AchievementSectionHeader"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="?android:attr/listDivider" />
 
-            <TextView
-                android:id="@+id/textview_totalClickedGood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Colors Clicked Correctly"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@android:color/black"/>
-
-            <TextView
-                android:id="@+id/textview_totalClickedBad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Colors Clicked Incorrectly"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@android:color/black"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="?android:attr/listDivider" />
-
-            <TextView
-                android:text="@string/textview_statTotalColorClickedLabel"
-                style="@style/AchievementSectionHeader" />
+        <ScrollView
+            android:id="@+id/scrollView_achievement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/linearlayout_achievementScrollviewContainer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="#eaeaea">
+                android:elevation="4dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp">
 
-                <GridLayout
+                <TextView
+                    android:text="@string/textview_statGeneralStats"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="0dp"
+                    style="@style/AchievementSectionHeader"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/textview_totalClickedGood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Total Colors Clicked Correctly"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:orientation="vertical"
-                    android:columnCount="3"
-                    android:rowCount="3">
+                    android:layout_marginEnd="5dp"/>
 
-                    <TextView
-                        android:id="@+id/textview_totalBlue"
-                        android:background="@color/blue"
-                        style="@style/AchievementColorClicked"/>
+                <TextView
+                    android:id="@+id/textview_totalClickedBad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Colors Clicked Incorrectly"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
 
-                    <TextView
-                        android:id="@+id/textview_totalRed"
-                        android:background="@color/red"
-                        style="@style/AchievementColorClicked"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?android:attr/listDivider" />
 
-                    <TextView
-                        android:id="@+id/textview_totalYellow"
-                        android:background="@color/yellow"
-                        style="@style/AchievementColorClickedHardToSee"/>
+                <TextView
+                    android:text="@string/textview_statTotalColorClickedLabel"
+                    android:textColor="@android:color/white"
+                    style="@style/AchievementSectionHeader" />
 
-                    <TextView
-                        android:id="@+id/textview_totalOrange"
-                        android:background="@color/orange"
-                        style="@style/AchievementColorClicked"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eaeaea">
 
-                    <TextView
-                        android:id="@+id/textview_totalGreen"
-                        android:background="@color/green"
-                        style="@style/AchievementColorClicked"/>
+                    <GridLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:orientation="vertical"
+                        android:columnCount="3"
+                        android:rowCount="3">
 
-                    <TextView
-                        android:id="@+id/textview_totalPurple"
-                        android:background="@color/purple"
-                        style="@style/AchievementColorClicked"/>
+                        <TextView
+                            android:id="@+id/textview_totalBlue"
+                            android:background="@color/blue"
+                            style="@style/AchievementColorClicked"/>
 
-                    <TextView
-                        android:id="@+id/textview_totalPink"
-                        android:background="@color/pink"
-                        style="@style/AchievementColorClicked"/>
+                        <TextView
+                            android:id="@+id/textview_totalRed"
+                            android:background="@color/red"
+                            style="@style/AchievementColorClicked"/>
 
-                    <TextView
-                        android:id="@+id/textview_totalWhite"
-                        android:background="@color/white"
-                        style="@style/AchievementColorClickedHardToSee"/>
+                        <TextView
+                            android:id="@+id/textview_totalYellow"
+                            android:background="@color/yellow"
+                            style="@style/AchievementColorClickedHardToSee"/>
 
-                </GridLayout>
+                        <TextView
+                            android:id="@+id/textview_totalOrange"
+                            android:background="@color/orange"
+                            style="@style/AchievementColorClicked"/>
+
+                        <TextView
+                            android:id="@+id/textview_totalGreen"
+                            android:background="@color/green"
+                            style="@style/AchievementColorClicked"/>
+
+                        <TextView
+                            android:id="@+id/textview_totalPurple"
+                            android:background="@color/purple"
+                            style="@style/AchievementColorClicked"/>
+
+                        <TextView
+                            android:id="@+id/textview_totalPink"
+                            android:background="@color/pink"
+                            style="@style/AchievementColorClicked"/>
+
+                        <TextView
+                            android:id="@+id/textview_totalWhite"
+                            android:background="@color/white"
+                            style="@style/AchievementColorClickedHardToSee"/>
+
+                    </GridLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:text="@string/textview_statMiscStats"
+                    android:textColor="@android:color/white"
+                    style="@style/AchievementSectionHeader"/>
+
+                <TextView
+                    android:id="@+id/textview_nicknameAchievement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nickname"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <TextView
+                    android:id="@+id/textview_currentPointsAchievement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Points"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <TextView
+                    android:id="@+id/textview_totalColorsBought"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Colors Bought"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:background="?android:attr/listDivider" />
+        </ScrollView>
 
-            <TextView
-                android:text="@string/textview_statMiscStats"
-                style="@style/AchievementSectionHeader"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/textview_nicknameAchievement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nickname"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@android:color/black"/>
-
-            <TextView
-                android:id="@+id/textview_currentPointsAchievement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current Points"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@android:color/black"/>
-
-            <TextView
-                android:id="@+id/textview_totalColorsBought"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Colors Bought"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@android:color/black"/>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-</LinearLayout>
+</FrameLayout>

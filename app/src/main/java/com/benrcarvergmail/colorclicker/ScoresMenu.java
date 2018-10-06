@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
 import java.util.ArrayList;
 
@@ -47,6 +51,11 @@ public class ScoresMenu extends AppCompatActivity {
         mListViewGlobal = (ListView) findViewById(R.id.listViewGlobal);
         mToggleListViews = (ToggleButton) findViewById(R.id.togglebutton_listViews);
 
+        // Change the parameters for the background image. This makes it scroll more slowly.
+        KenBurnsView backgroundKBV = (KenBurnsView)findViewById(R.id.background_kenburnsview);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(20000, new AccelerateDecelerateInterpolator());
+        backgroundKBV.setTransitionGenerator(generator);
+
         // Add the scores to the ArrayList
         for(int i = 0; i < MainMenu.sLocalHighScores.size(); i++) {
             mHighScoresLocal.add(MainMenu.sLocalHighScores.get(i).getNickname() + "                                       " + MainMenu.sLocalHighScores.get(i).getScore());
@@ -56,7 +65,6 @@ public class ScoresMenu extends AppCompatActivity {
         for(int i = 0; i < MainMenu.sGlobalHighScores.size(); i++) {
             mHighScoresGlobal.add(MainMenu.sLocalHighScores.get(i).getNickname() + "                                       " + MainMenu.sGlobalHighScores.get(i).getScore());
         }
-
 
         // Instantiate the adapters
         mLocalAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_layout, mHighScoresLocal);
